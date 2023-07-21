@@ -20,6 +20,7 @@ class App_USSD(APIView):
         # data = JSONParser().parse(request)
 
         data = request.data
+        print(data)
 
         # get params from data, use this with Africa's talking
         session_id = data.get("SESSION_ID", None)

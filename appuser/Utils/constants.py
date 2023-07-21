@@ -19,7 +19,7 @@ PREVIOUS_RESPONSE_SWAHILI = f"---\n{BACK_DIGIT}:RUDI NYUMA"
 FOOTER_RESPONSE =f"{PREVIOUS_RESPONSE} {BACK_RESPONSE}"
 
 LEVEL_ONE_OPTIONS = ['1','2','3','4','5']
-LEVEL_TWO_OPTIONS = ['1','2','3','4']
+LEVEL_TWO_OPTIONS = ['1','2','3','4','5','6']
 
 
 LEVEL_ONE_OPTIONS_META_DATA = {
@@ -28,7 +28,7 @@ LEVEL_ONE_OPTIONS_META_DATA = {
 }
 
 LEVEL_TWO_OPTIONS_META_DATA = {
-    "options":['1','2','3','4'],
+    "options":['1','2','3','4','5','6'],
     "position_in_array":1
 }
 

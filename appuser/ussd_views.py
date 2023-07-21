@@ -19,14 +19,19 @@ class App_USSD(APIView):
         # convert request data to JSON, use this outside Africa's talking
         # data = JSONParser().parse(request)
 
-        data = request.data
+        data = request.GET
         print(data)
-
-        # get params from data, use this with Africa's talking
-        session_id = data.get("SESSION_ID", None)
-        serviceCode = data.get("SERVICE_CODE", None)
-        phone_number = data.get("MSISDN", None)
-        text = data.get("USSD_STRING", None)
+        # # get params from data, use this with Africa's talking
+        session_id = request.GET.get("SESSION_ID", None)
+        serviceCode = request.GET.get("SERVICE_CODE", None)
+        phone_number = request.GET.get("MSISDN", None)
+        text = request.GET.get("USSD_STRING", None)
+        
+        # # get params from data, use this with Africa's talking
+        # session_id = data.get("SESSION_ID", None)
+        # serviceCode = data.get("SERVICE_CODE", None)
+        # phone_number = data.get("MSISDN", None)
+        # text = data.get("USSD_STRING", None)
         
         if text == None:
             text = data.get("text", "default")

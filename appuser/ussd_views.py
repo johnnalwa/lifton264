@@ -93,7 +93,7 @@ class App_USSD(APIView):
 
         # Save session here
 
-        # saveSessionsToDatabase(
-        #     phoneNumber=phone_number, text=text, sessionNumber=session_id, response=response)
+        saveSessionsToDatabase(
+            phoneNumber=phone_number, text=text, sessionNumber=session_id, response=response)
 
         return HttpResponse(response)

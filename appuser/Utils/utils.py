@@ -3,6 +3,7 @@ import json
 
 import requests
 from appuser.Utils import constants
+from appuser.models import Sessions
 
 
 headers = {

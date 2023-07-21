@@ -14,10 +14,10 @@ from appuser.Utils.utils import goToBack, goToMain, removeUnwantedTexts, replace
 
 
 class App_USSD(APIView):
-    def post(self, request, format=None):
+    def get(self, request, format=None):
         response = ""
         # convert request data to JSON, use this outside Africa's talking
-        data = JSONParser().parse(request)
+        # data = JSONParser().parse(request)
 
         data = request.data
 

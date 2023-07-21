@@ -249,7 +249,32 @@ def response_menu_inputs_voucher_accept_voucher(custom_text_two):
 
 # end inputs
 
+# market
 
+# Market
+# -List product
+# -look for vendors for aggregation 
+def response_menu_market(custom_text_two):
+    response = f'CON Market\n'
+    response += "1. List products\n"
+    response += "2. Look for vendors for aggregation \n"    
+    return response
+
+def response_menu_market_select_product(custom_text_two):
+    response = f'CON List of products\n'
+    response += "1. Product 1\n"
+    response += "2. Product 2\n"  
+    response += "3. Product 3\n"
+    
+    return response
+
+def response_menu_market_select_vendor(custom_text_two):
+    response = f'CON List of vendors\n'
+    response += "1. Vendor 1\n"
+    response += "2. Vendor 2\n"  
+    response += "3. Vendor 3\n"
+    
+    return response
 
 
 
@@ -290,6 +315,8 @@ def response_main_with_text(text, custom_text,
             return response_menu_loan(custom_text)
         if custom_text[-1] == '5':
             return response_menu_inputs(custom_text)
+        if custom_text[-1] == '6':
+            return response_menu_market(custom_text)
         
     elif level == 3:
         if custom_text[-2] == '1':
@@ -322,8 +349,12 @@ def response_main_with_text(text, custom_text,
             if custom_text[-1] == '1':
                 return response_menu_inputs_normal_order(custom_text)
             elif custom_text[-1] == '2':
-                return response_menu_inputs_voucher_order(custom_text)
-           
+                return response_menu_market_select_product(custom_text)
+        elif custom_text[-2] == '6':
+            if custom_text[-1] == '1':
+                return response_menu_market_select_product(custom_text)
+            elif custom_text[-1] == '2':
+                return response_menu_market_select_vendor(custom_text)    
             
        
     

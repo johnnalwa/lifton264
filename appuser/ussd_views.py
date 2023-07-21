@@ -16,8 +16,8 @@ from appuser.Utils.utils import goToBack, goToMain, removeUnwantedTexts, replace
 class App_USSD(APIView):
     def post(self, request, format=None):
         response = ""
-        # conver request data to JSON, use this outside Africa's talking
-        # data = JSONParser().parse(request)
+        # convert request data to JSON, use this outside Africa's talking
+        data = JSONParser().parse(request)
 
         data = request.data
 
@@ -30,7 +30,7 @@ class App_USSD(APIView):
         if text == None:
             text = data.get("text", "default")
         
-        networkCode = data.get("networkCode", None)
+        # networkCode = data.get("networkCode", None)
 
         # uncomment this when using Africa's talking
         # session_id = data["sessionId"]

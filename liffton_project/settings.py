@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'import_export',
     'appuser',
+    'members'
    
 ]
 

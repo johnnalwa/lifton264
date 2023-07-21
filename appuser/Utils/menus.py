@@ -114,11 +114,34 @@ def response_menu_pay_welfare_savings_stk(custom_text_two):
 def response_menu_penalties(custom_text_two):
     response = f'CON '
     response += "1. View penalties\n"
-    response += "2. Pay for penalties  \n"
+    response += "2. Do you want to pay for penalties  \n"
+    return response
+def response_menu_view_penalties(custom_text_two):
+    response = f'END '
+    response += "Penalties is ksh 10,000 \n"
     return response
 
 
+def response_menu_want_to_pay_penalties(custom_text_two):
+    response = f'CON '
+    response += "1. Yes \n"
+    response += "2. No \n"
+    return response
 
+def response_menu_pay_penalties_yes(custom_text_two):
+    response = f'CON '
+    response += "Enter the amount you want to save \n"
+    return response
+
+def response_menu_pay_penalties_stk(custom_text_two):
+    response = f'END '
+    response += "An STK push will be sent to your phone \n"
+    return response
+
+def response_menu_pay_penalties_no(custom_text_two):
+    response = f'END '
+    response += "Thank you for using the E-Group system \n"
+    return response
 
 def response_main_with_text(text, custom_text, 
     phone_number, custom_text_two
@@ -151,6 +174,8 @@ def response_main_with_text(text, custom_text,
             return response_menu_savings(custom_text)
         if custom_text[-1] == '2':
             return response_menu_welfare(custom_text)
+        if custom_text[-1] == '3':
+            return response_menu_penalties(custom_text)
         
     elif level == 3:
         if custom_text[-2] == '1':
@@ -167,6 +192,11 @@ def response_main_with_text(text, custom_text,
                 return response_menu_welfare_total_savings(custom_text)
             elif custom_text[-1] == '3':
                 return response_menu_pay_welfare_savings(custom_text)
+        elif custom_text[-2] == '3':
+            if custom_text[-1] == '1':
+                return response_menu_view_penalties(custom_text)
+            elif custom_text[-1] == '2':
+                return response_menu_want_to_pay_penalties(custom_text)
             
        
     
@@ -178,6 +208,12 @@ def response_main_with_text(text, custom_text,
                 return response_menu_want_to_save_no(custom_text)
         elif custom_text[-3] == '2':
             return response_menu_pay_welfare_savings_stk(custom_text)
+        elif custom_text[-3] == '3':
+            if custom_text[-1] == '1':
+                return response_menu_pay_penalties_yes(custom_text)
+            elif custom_text[-1] == '2':
+                return response_menu_pay_penalties_no(custom_text)
+            # return response_menu_pay_welfare_savings_stk(custom_text)
                 
        
     elif level == 5:
@@ -185,6 +221,8 @@ def response_main_with_text(text, custom_text,
             return response_menu_want_to_save_yes_amount(custom_text)
         elif custom_text[-2] == '2':
             return response_menu_pay_welfare_savings_stk(custom_text)
+        elif custom_text[-2] == '3':
+            return response_menu_pay_penalties_stk(custom_text)
             
             
 

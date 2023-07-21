@@ -9,13 +9,15 @@ After=network.target
 User=root
 Group=www-data
 
-WorkingDirectory=/home/root/Projects/Python/Django/liffton_backend
+WorkingDirectory=/root/Projects/Python/Django/liffton_project
 
-ExecStart=/home/root/Projects/Python/Django/appvenv/bin/gunicorn \
+ExecStart=/root/Projects/Python/Django/appenv/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
-          --bind unix:/home/root/Projects/Python/Django/liffton_backend/liffton.sock \
-          liffton_backend.wsgi:application
+          --bind unix:/root/Projects/Python/Django/liffton_project/liffton.sock \
+          liffton_project.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
+
+

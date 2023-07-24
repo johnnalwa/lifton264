@@ -70,14 +70,14 @@ def response_menu_savings(custom_text_two):
     response += constants.FOOTER_RESPONSE
     return response
 
-def response_menu_group_savings(custom_text_two):
+def response_menu_group_savings(custom_text_two,savings):
     response = f'END Savings\n'
-    response += "Group Savings balance is ksh 10,000 \n"
+    response += f"Group Savings balance is ksh {savings} \n"
     return response
 
-def response_menu_your_savings(custom_text_two):
+def response_menu_your_savings(custom_text_two,savings):
     response = f'END Savings\n'
-    response += "Your Group Savings balance is ksh 3,000 \n"
+    response += f"Your Group Savings balance is ksh {savings} \n"
     return response
 
 def response_menu_want_to_save(custom_text_two):
@@ -95,7 +95,10 @@ def response_menu_want_to_save_yes(custom_text_two):
 def response_menu_want_to_save_yes_amount(custom_text_two):
     response = f'END Savings\n'
     amount = custom_text_two[-1]
-    response += f"You are saving Ksh {amount}. An STK push will be sent to your phone \n"
+    # send MPESA stk in future
+    # response += f"You are saving Ksh {amount}. An STK push will be sent to your phone \n"
+    response += f"Success! You have saved Ksh {amount} \n"
+    
     return response
 
 def response_menu_want_to_save_no(custom_text_two):
@@ -135,7 +138,9 @@ def response_menu_pay_welfare_savings(custom_text_two):
 def response_menu_pay_welfare_savings_stk(custom_text_two):
     response = f'END Welfare\n'
     amount = custom_text_two[-1]
-    response += f"Welfare amount Ksh {amount}. An STK push will be sent to your phone \n"
+    # response += f"Welfare amount Ksh {amount}. An STK push will be sent to your phone \n"
+    response += f"Success! Saved welfare amount Ksh {amount}. \n"
+    
     return response
 
 
@@ -167,7 +172,9 @@ def response_menu_pay_penalties_yes(custom_text_two):
 def response_menu_pay_penalties_stk(custom_text_two):
     response = f'END Penalties\n'
     amount = custom_text_two[-1]
-    response += f"Penalty of Ksh {amount}. An STK push will be sent to your phone \n"
+    # response += f"Penalty of Ksh {amount}. An STK push will be sent to your phone \n"
+    response += f"Penalty of Ksh {amount}. \n"
+    
     
     return response
 

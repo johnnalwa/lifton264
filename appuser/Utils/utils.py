@@ -168,7 +168,7 @@ def checkInstanceIsInt(val):
 
 def getRealIDForRepID(array, rep_id, key1="rep_id", key2="id"):
 
-    real_id = ""
+    real_id = None
 
     for x in array:
         if str(x[key1]) == str(rep_id):

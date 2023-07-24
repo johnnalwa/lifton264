@@ -19,3 +19,11 @@ class GroupMembersSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroupMembers
         fields = ('id',"member_id","group_id","group_name","member_name","group_code",)
+        
+
+class SavingsSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Saving
+        fields = ('id',"member_id","amount",)
+        

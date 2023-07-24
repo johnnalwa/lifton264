@@ -51,8 +51,9 @@ def Put_Groups_to_String(member_id):
         group_code=val['group_code']
         group_name=val['group_name']
         
-        group_rep_id_plus_id.append({"rep_id": group_code, "id": group_db_id})
-        group_rep_id.append(group_code)
+        group_rep_id_plus_id.append({"rep_id": idx+1, "id": group_db_id})
+        
+        group_rep_id.append(idx+1)
         
         response_to_be_added = f'{idx+1}' + ". " +  group_code + "\n"
         response += response_to_be_added
@@ -77,17 +78,67 @@ def SumMemberSavings(array):
             savings_sum += saving
         return savings_sum
     else:
-        return "no data"
-    
-def member_save_to_group(member_id,custom_text):
-    
+        return f"0.00"
+  
+def get_member_savings(custom_text,member_id):
     group_selected = custom_text[1]
-    pass
+    member_groups_string = Put_Groups_to_String(member_id=member_id)
 
-    member_id_rep_plus_id = Put_Groups_to_String(member_id=member_id)["rep_id_plus_id"]
+
+    member_id_rep_plus_id = member_groups_string["rep_id_plus_id"]
 
     group_id  = getRealIDForRepID(array=member_id_rep_plus_id,rep_id=group_selected)
     
+    
+    savings = Saving.objects.filter(group_id=group_id).filter(member_id=member_id)
+    savings_serializer = SavingsSerializer(savings,many=True).data
+    
+    # print(savings_serializer)
+    # print(SumMemberSavings(savings_serializer))
+    
+    return SumMemberSavings(savings_serializer)
+
+def get_group_savings(custom_text,member_id):
+    group_selected = custom_text[1]
+    member_groups_string = Put_Groups_to_String(member_id=member_id)
+
+
+    member_id_rep_plus_id = member_groups_string["rep_id_plus_id"]
+
+    group_id  = getRealIDForRepID(array=member_id_rep_plus_id,rep_id=group_selected)
+    
+    
+    savings = Saving.objects.filter(group_id=group_id)
+    savings_serializer = SavingsSerializer(savings,many=True).data
+    
+    # print(savings_serializer)
+    # print(SumMemberSavings(savings_serializer))
+    
+    return SumMemberSavings(savings_serializer)
+  
+def member_save_to_group(custom_text,member_id):
+    
+    group_selected = custom_text[1]
+    amount = custom_text[-1]
+    
+    
+    member_groups_string = Put_Groups_to_String(member_id=member_id)
+
+
+    member_id_rep_plus_id = member_groups_string["rep_id_plus_id"]
+
+    group_id  = getRealIDForRepID(array=member_id_rep_plus_id,rep_id=group_selected)
+    
+    group_id_object = Group.objects.get(id=group_id)
+    member_id_object = Member.objects.get(id=member_id)
+    
+    savings = Saving(member_id=member_id_object,group_id=group_id_object,amount=amount)
+    savings.save()
+    
     print("group_id query ")
-    print(group_id)
+    print(member_groups_string)
+    print(group_selected)
+    print(member_id_object)
+    
+    
     

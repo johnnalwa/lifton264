@@ -1,10 +1,12 @@
 from appuser.Utils.menus import *
-def level4(custom_text):
+def level4(custom_text,member_id):
     if custom_text[-2] == '1':
         if custom_text[-1] == '1':
-            return response_menu_group_savings(custom_text)
+            savings_total = get_member_savings(custom_text,member_id)
+            return response_menu_group_savings(custom_text,savings_total)
         elif custom_text[-1] == '2':
-            return response_menu_your_savings(custom_text)
+            savings_total = get_member_savings(custom_text,member_id)
+            return response_menu_your_savings(custom_text,savings_total)
         elif custom_text[-1] == '3':
             return response_menu_want_to_save(custom_text)
     elif custom_text[-2] == '2':

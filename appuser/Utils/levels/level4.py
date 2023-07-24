@@ -1,0 +1,40 @@
+from appuser.Utils.menus import *
+def level4(custom_text):
+    if custom_text[-2] == '1':
+        if custom_text[-1] == '1':
+            return response_menu_group_savings(custom_text)
+        elif custom_text[-1] == '2':
+            return response_menu_your_savings(custom_text)
+        elif custom_text[-1] == '3':
+            return response_menu_want_to_save(custom_text)
+    elif custom_text[-2] == '2':
+        if custom_text[-1] == '1':
+            return response_menu_welfare_group_balance(custom_text)
+        elif custom_text[-1] == '2':
+            return response_menu_welfare_total_savings(custom_text)
+        elif custom_text[-1] == '3':
+            return response_menu_pay_welfare_savings(custom_text)
+    elif custom_text[-2] == '3':
+        if custom_text[-1] == '1':
+            return response_menu_view_penalties(custom_text)
+        elif custom_text[-1] == '2':
+            return response_menu_want_to_pay_penalties(custom_text)
+    elif custom_text[-2] == '4':
+        if custom_text[-1] == '1':
+            return response_menu_group_loan(custom_text)
+        elif custom_text[-1] == '2':
+            return response_menu_my_loan(custom_text)
+        elif custom_text[-1] == '3':
+            return response_menu_apply_input_loan(custom_text)
+    elif custom_text[-2] == '5':
+        if custom_text[-1] == '1':
+            return response_menu_inputs_normal_order(custom_text)
+        elif custom_text[-1] == '2':
+            return response_menu_market_select_product(custom_text)
+    elif custom_text[-2] == '6':
+        if custom_text[-1] == '1':
+            return response_menu_market_select_product(custom_text)
+        elif custom_text[-1] == '2':
+            return response_menu_market_select_vendor(custom_text)    
+
+        

@@ -32,6 +32,11 @@ LEVEL_TWO_OPTIONS_META_DATA = {
     "position_in_array":1
 }
 
+LEVEL_THREE_OPTIONS_META_DATA = {
+    "options":['1','2','3','4','5','6'],
+    "position_in_array":1
+}
+
 LEVEL_FOUR_OPTIONS_META_DATA = {
     # options are dynamically generated
     "position_in_array":3

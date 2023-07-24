@@ -11,6 +11,12 @@ class MemberAdmin(ImportExportModelAdmin):
 admin.site.register(Member, MemberAdmin)
 
 
+class GroupMembersAdmin(ImportExportModelAdmin):
+    list_display = ("id", "member_id","group_id","create_at")
+    pass
+admin.site.register(GroupMembers, GroupMembersAdmin)
+
+
 class GroupAdmin(ImportExportModelAdmin):
     list_display = ("id", "name","special_code", "ward_id")
     pass

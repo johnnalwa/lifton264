@@ -3,9 +3,13 @@ from django.http import HttpResponse
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from appuser.Utils.constants import LEVEL_ONE_OPTIONS_META_DATA, LEVEL_TWO_OPTIONS_META_DATA
-from appuser.Utils.menus import response_main_with_text
+from appuser.Utils.responses import *
+from appuser.Utils.menus import *
+from members.Utils.database_queries import *
+from appuser.Utils.utils import *
 
-from appuser.Utils.utils import goToBack, goToMain, removeUnwantedTexts, replaceCommaSpace, replaceEstericWithSpace, replaceSpaceFromText, saveSessionsToDatabase
+# goToBack, goToMain, removeUnwantedTexts, replaceCommaSpace, replaceEstericWithSpace, replaceSpaceFromText, saveSessionsToDatabase
+import json
 # Create your views here.
 
 
@@ -32,6 +36,15 @@ class App_USSD(APIView):
         # serviceCode = data.get("SERVICE_CODE", None)
         # phone_number = data.get("MSISDN", None)
         # text = data.get("USSD_STRING", None)
+        
+        '''
+        Get user details here
+        '''
+        member_details = get_member_details_from_phone(phone_number)
+        
+        print("member_details")
+        print(member_details)
+        # print(json.load(member_details))
         
         if text == None:
             text = data.get("text", "default")
@@ -77,19 +90,25 @@ class App_USSD(APIView):
 
         custom_text = custom_text.split()
         custom_text_two = custom_text_two.split()
-
+        
+        # check is user is in system and has 
+        
+        if member_details != None:
+            
       
-        if text == '' or len(custom_text) == 0:
-            # level 1
-            response = response_main_with_text(
-               text=text, custom_text=custom_text, phone_number=phone_number,
-                custom_text_two=custom_text_two)
-        else:
-            # when the text is not empty
-            response = response_main_with_text(
+            if text == '' or len(custom_text) == 0:
+                # level 1
+                response = response_main_with_text(
                 text=text, custom_text=custom_text, phone_number=phone_number,
-                custom_text_two=custom_text_two
-            )
+                    custom_text_two=custom_text_two,member_id=member_details['json']['id'])
+            else:
+                # when the text is not empty
+                response = response_main_with_text(
+                    text=text, custom_text=custom_text, phone_number=phone_number,
+                    custom_text_two=custom_text_two,member_id=member_details['json']['id'])
+                
+        else:
+            response = response_not_registered(custom_text_two)
 
         # Save session here
 

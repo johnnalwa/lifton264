@@ -1,0 +1,8 @@
+from appuser.Utils.menus import *
+def level6(custom_text):
+    if custom_text[-2] == '1':
+        return response_menu_want_to_save_yes_amount(custom_text)
+    elif custom_text[-2] == '2':
+        return response_menu_pay_welfare_savings_stk(custom_text)
+    elif custom_text[-2] == '3':
+        return response_menu_pay_penalties_stk(custom_text)

@@ -100,10 +100,20 @@ class Member(models.Model):
     def update_profile(sender,instance,created,*args,**kwargs):
         if created:
             Member.objects.create(user=instance)
+            print(instance)
+            print("instance")
+            
             if instance.profile != None:
                 instance.profile.save()
 			
+class GroupMembers(models.Model):
+    member_id = models.ForeignKey(Member, on_delete=models.CASCADE,null=True, blank=True)
+    group_id = models.ForeignKey(Group, on_delete=models.CASCADE,null=True, blank=True)
+    create_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now_add = True)
 
+    def _str_(self):
+        return str(self.member_id)
 
 
 

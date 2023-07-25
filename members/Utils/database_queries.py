@@ -212,8 +212,8 @@ def get_member_loan(custom_text,member_id):
     group_id  = getRealIDForRepID(array=member_id_rep_plus_id,rep_id=group_selected)
     
     
-    loans = Loan.objects.filter(group_id=group_id).filter(member_id=member_id)
-    loans_serializer = SavingsSerializer(loans,many=True).data
+    loans = Loan.objects.filter(group_id=group_id).filter(group_member_id=member_id)
+    loans_serializer = LoansSerializer(loans,many=True).data
     
     
     return SumMemberSavings(loans_serializer)
@@ -228,7 +228,7 @@ def get_group_loans(custom_text,member_id):
     
     
     loans = Loan.objects.filter(group_id=group_id)
-    loans_serializer = SavingsSerializer(loans,many=True).data
+    loans_serializer = LoansSerializer(loans,many=True).data
     
     return SumMemberSavings(loans_serializer)
 

@@ -201,14 +201,14 @@ def response_menu_loan(custom_text_two):
     response += constants.FOOTER_RESPONSE
     return response
 
-def response_menu_group_loan(custom_text_two):
+def response_menu_group_loan(custom_text_two,loan):
     response = f'END Loan\n'
-    response += "Group loan is ksh 10,000 \n"
+    response += f"Group loan is ksh {loan} \n"
     return response
 
-def response_menu_my_loan(custom_text_two):
+def response_menu_my_loan(custom_text_two,loan):
     response = f'END Loan\n'
-    response += "Your loan is ksh 10,000 \n"
+    response += f"Your loan is ksh {loan} \n"
     return response
 def response_menu_apply_input_loan(custom_text_two):
     response = f'END Loan\n'
@@ -310,19 +310,18 @@ def response_menu_market(custom_text_two):
     return response
 
 def response_menu_market_select_product(custom_text_two):
+    products = Put_Product_to_String()
     response = f'CON List of products\n'
-    response += "1. Product 1\n"
-    response += "2. Product 2\n"  
-    response += "3. Product 3\n"
+    response += products['response']
     response += constants.FOOTER_RESPONSE
     
     return response
 
 def response_menu_market_select_vendor(custom_text_two):
     response = f'CON List of vendors\n'
+    vendors = Put_Vendors_to_String()
     response += "1. Vendor 1\n"
-    response += "2. Vendor 2\n"  
-    response += "3. Vendor 3\n"
+    response += vendors['response']
     response += constants.FOOTER_RESPONSE
     
     return response

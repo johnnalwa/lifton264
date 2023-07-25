@@ -26,4 +26,26 @@ class SavingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Saving
         fields = ('id',"member_id","amount",)
-        
+    
+    
+class ProductsSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Product
+        fields = ('id',"vendor_id","name","category","retail_price","wholesale_price")
+
+
+class VendorsSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Vendor
+        fields = ('id',"business_name")
+
+
+class LoansSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Loan
+        fields = ('id',"group_id","group_member_id","amount","amount_due","duration_days","penalty_rate","interest","loan_type","due_date","approved_date","status")
+    
+    

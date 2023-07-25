@@ -5,7 +5,7 @@ from members.Utils.database_queries import *
 def level3(custom_text,member_id=None):
     if custom_text[-1] == '1':
         
-        return response_menu_savings(custom_text)
+        return response_menu_savings(custom_text,member_id)
     if custom_text[-1] == '2':
         return response_menu_welfare(custom_text)
     if custom_text[-1] == '3':

@@ -62,8 +62,9 @@ def response_menu_one(custom_text_two):
 
 # Savings
 
-def response_menu_savings(custom_text_two):
-    response = f'CON Savings\n'
+def response_menu_savings(custom_text_two,member_id):
+    group_code =get_group_member_id_from_text(custom_text_two,member_id)["group_code"]
+    response = f'CON Savings for group {group_code}\n'
     response += "1. Group Savings balance \n"
     response += "2. Your savings balance \n"
     response += "3. Do you want to save? \n"
@@ -80,8 +81,9 @@ def response_menu_your_savings(custom_text_two,savings):
     response += f"Your Group Savings balance is ksh {savings} \n"
     return response
 
-def response_menu_want_to_save(custom_text_two):
-    response = f'CON Savings\n'
+def response_menu_want_to_save(custom_text_two,member_id):
+    group_code =get_group_member_id_from_text(custom_text_two,member_id)["group_code"]
+    response = f'CON Sure to save for group {group_code}?\n'
     response += "1. Yes \n"
     response += "2. No \n"
     return response
@@ -92,12 +94,13 @@ def response_menu_want_to_save_yes(custom_text_two):
     response += constants.FOOTER_RESPONSE
     return response
 
-def response_menu_want_to_save_yes_amount(custom_text_two):
+def response_menu_want_to_save_yes_amount(custom_text_two,member_id):
     response = f'END Savings\n'
     amount = custom_text_two[-1]
+    group_code =get_group_member_id_from_text(custom_text_two,member_id)["group_code"]
     # send MPESA stk in future
     # response += f"You are saving Ksh {amount}. An STK push will be sent to your phone \n"
-    response += f"Success! You have saved Ksh {amount} \n"
+    response += f"Success! You have saved Ksh {amount} for group {group_code} \n"
     
     return response
 
@@ -249,19 +252,19 @@ def response_menu_inputs_normal_order(custom_text_two):
 
 
 def response_menu_inputs_normal_select_product(custom_text_two):
+    # Put_Product_to_String
+    products = Put_Product_to_String()
     response = f'CON Make order from inputs\n'
-    response += "1. Product 1\n"
-    response += "2. Product 2\n"    
-    response += "3. Product 3\n"
+    response += products['response']
     response += constants.FOOTER_RESPONSE    
     
     return response
 
 def response_menu_inputs_normal_select_vendor(custom_text_two):
+    vendors = Put_Vendors_to_String()
+    
     response = f'CON Make order from inputs\n'
-    response += "1. Vendor 1\n"
-    response += "2. Vendor 2\n"    
-    response += "3. Vendor 3\n" 
+    response += vendors['response']
     response += constants.FOOTER_RESPONSE   
     
     return response

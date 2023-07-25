@@ -8,7 +8,7 @@ def level4(custom_text,member_id):
             savings_total = get_member_savings(custom_text,member_id)
             return response_menu_your_savings(custom_text,savings_total)
         elif custom_text[-1] == '3':
-            return response_menu_want_to_save(custom_text)
+            return response_menu_want_to_save(custom_text,member_id)
     elif custom_text[-2] == '2':
         if custom_text[-1] == '1':
             return response_menu_welfare_group_balance(custom_text)

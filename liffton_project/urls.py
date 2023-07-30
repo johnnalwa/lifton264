@@ -18,8 +18,17 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+admin.site.site_header  =  "Integrated Group Information Management System"  
+admin.site.site_title  =  "Integrated Group Information Management System"
+admin.site.index_title  =  "eGroup"
+
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ussd/', include('appuser.urls')),
+    path('', include('members.urls')),
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

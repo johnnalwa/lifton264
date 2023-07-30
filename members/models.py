@@ -5,10 +5,23 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.validators import MaxValueValidator, MinValueValidator
+
+
+from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 length= 255
+expiry_days= 255
 
 # Create your models here.
 
+
+
+class User(AbstractUser):
+    email = models.EmailField(unique=True)
+    is_member = models.BooleanField(default=False)
+    is_vendor = models.BooleanField(default=False)
+    is_management = models.BooleanField(default=False)
+ 
 class County(models.Model):    
   id = models.AutoField(primary_key=True)
   name = models.CharField(max_length=256, null=True) 
@@ -16,7 +29,7 @@ class County(models.Model):
   def __str__(self):
         return str(self.name)
       
-
+ 
 class SubCounty(models.Model):
     id = models.CharField(max_length=100, primary_key=True)
     county_id = models.ForeignKey('County', on_delete=models.CASCADE)
@@ -45,27 +58,24 @@ class Ward(models.Model):
         return '%s' % self.name
 
 
-class Group(models.Model):
-    name = models.CharField(max_length=length,null=True, blank=True, unique=True)
-    special_code = models.CharField(max_length=4,null=True, blank=True)
-    group_type = models.CharField(max_length=length,null=True, blank=True)
-    ward_id = models.ForeignKey(Ward, on_delete=models.CASCADE,null=True, blank=True)
-    business_activity = models.CharField(max_length=length,null=True, blank=True)
-    bank_name = models.CharField(max_length=length,null=True, blank=True)
-    bank_services = models.CharField(max_length=length,null=True, blank=True)
-    mpesa_paybill = models.CharField(max_length=length,null=True, blank=True)
-    mpesa_busines_number = models.CharField(max_length=length,null=True, blank=True)
-    mpesa_account_number = models.CharField(max_length=length,null=True, blank=True)
-    chairperson_name = models.CharField(max_length=length,null=True, blank=True)
-    chairperson_phone_number = models.CharField(max_length=length,null=True, blank=True)
-    secretary_name = models.CharField(max_length=length,null=True, blank=True)
-    secretary_phone = models.CharField(max_length=length,null=True, blank=True)
-    opportunity = models.CharField(max_length=length,null=True, blank=True)
-    create_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now_add = True)
-
+class ManagementAdmin(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='staffadmins')
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
+    gender = models.CharField(max_length=100, blank=True, null=True)
+    national_id = models.CharField(max_length=100, blank=True, null=True)
+    telephone = models.CharField(max_length=100, blank=True, null=True)
+    bio = models.TextField(max_length=10, blank=True, null=True)
+    date_of_birth = models.DateField(blank=True, null=True)
+    experience = models.TextField(blank=True, null=True)
+    education = models.TextField(blank=True, null=True)
+    active = models.BooleanField(default=False, blank=True, null=True)
+    banned = models.BooleanField(default=False, blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)    
     def __str__(self):
-        return '%s' % self.name
+        return self.user.username   
+
+
 
 
 class Member(models.Model):
@@ -81,31 +91,53 @@ class Member(models.Model):
     year_of_birth = models.CharField(max_length=4,null=True, blank=True)
     gender = models.CharField(max_length=10,null=True, blank=True)
     ward_id = models.ForeignKey(Ward, on_delete=models.CASCADE,null=True, blank=True)
-    default_group_id = models.ForeignKey(Group, on_delete=models.CASCADE,null=True, blank=True)
     profile_img = models.ImageField(upload_to='Profile', default='default.png',null=True, blank=True)
     create_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now_add = True)
     
     def __str__(self):
-        return self.user.username    #i use this function because i dont use null =True in user -everytime i need this
-	
+        return self.user.username    
+    
 
-    class Meta:
-        verbose_name_plural ='Member'
-        db_table = 'tbl_members'
-    def save(self,*args,**kwargs):
-        super().save(*args,**kwargs)
-        
-    @receiver(post_save, sender = User)
-    def update_profile(sender,instance,created,*args,**kwargs):
-        if created:
-            Member.objects.create(user=instance)
-            print(instance)
-            print("instance")
-            
-            if instance.profile != None:
-                instance.profile.save()
-			
+class Vendor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True, blank=True, unique=True)
+    ward_id = models.ForeignKey(Ward, on_delete=models.CASCADE,null=True, blank=True)
+    business_name = models.CharField(max_length=length,null=True, blank=True, unique=True)
+    shopping_centre_name = models.CharField(max_length=length,null=True, blank=True)
+    contact_person_name = models.CharField(max_length=length,null=True, blank=True)
+    contact_person_phone = models.CharField(max_length=length,null=True, blank=True)
+    contact_person_password = models.CharField(max_length=length,null=True, blank=True)
+    api_key = models.CharField(max_length=length,null=True, blank=True)
+    create_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now_add = True)
+    def __str__(self):
+        return '%s' % self.business_name
+
+     
+  
+
+class Group(models.Model):
+    name = models.CharField(max_length=length,null=True, blank=True, unique=True)
+    special_code = models.CharField(max_length=4,null=True, blank=True)
+    group_type = models.CharField(max_length=length,null=True, blank=True)
+    ward_id = models.ForeignKey(Ward, on_delete=models.CASCADE,null=True, blank=True)
+    business_activity = models.CharField(max_length=length,null=True, blank=True)
+    bank_name = models.CharField(max_length=length,null=True, blank=True)
+    bank_services = models.CharField(max_length=length,null=True, blank=True)
+    mpesa_paybill = models.CharField(max_length=length,null=True, blank=True)
+    mpesa_busines_number = models.CharField(max_length=length,null=True, blank=True)
+    mpesa_account_number = models.CharField(max_length=length,null=True, blank=True)
+    default_group_id = models.ForeignKey(Member, on_delete=models.CASCADE,null=True, blank=True)
+    secretary_name = models.CharField(max_length=length,null=True, blank=True)
+    secretary_phone = models.CharField(max_length=length,null=True, blank=True)
+    opportunity = models.CharField(max_length=length,null=True, blank=True)
+    create_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return '%s' % self.name
+
+
 class GroupMembers(models.Model):
     member_id = models.ForeignKey(Member, on_delete=models.CASCADE,null=True, blank=True)
     group_id = models.ForeignKey(Group, on_delete=models.CASCADE,null=True, blank=True)
@@ -140,6 +172,24 @@ class SavingLog(models.Model):
     def __str__(self):
         return '%s' % self.transaction_phone
 
+
+class Voucher(models.Model):
+    code = models.CharField(max_length=length,null=True, blank=True, unique=True)
+    create_at = models.DateTimeField(auto_now_add = True)
+    expiry =  models.TextField(null=True, blank=True, default=expiry_days)
+    amount_equivalent = models.FloatField(null=True, blank=True, default=0.0)
+    reviewed =models.BooleanField(null=True, blank=True, default=False)
+    voucher_issued =models.BooleanField(null=True, blank=True, default=False)    
+    product_issued =models.BooleanField(null=True, blank=True, default=False)
+    cancelled =models.BooleanField(null=True, blank=True, default=False)  
+    updated_at = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return '%s' % self.name
+
+
+
+
 class LoanProduct(models.Model):
     name = models.CharField(max_length=length,null=True, blank=True)
     description =  models.TextField(null=True, blank=True)
@@ -151,28 +201,13 @@ class LoanProduct(models.Model):
     borrowing_times = models.IntegerField(null=True, blank=True)
     create_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now_add = True)
+    
 
     def __str__(self):
         return '%s' % self.name
 
 
-class GroupLoanProduct(models.Model):
-    #group_id = models.ForeignKey(Group, on_delete=models.CASCADE,null=True, blank=True)
-    name = models.CharField(max_length=length,null=True, blank=True)
-    group_loan_product_id = models.ForeignKey(LoanProduct, on_delete=models.CASCADE,null=True, blank=True)
-    group_loan_product_name = models.CharField(max_length=length,null=True, blank=True)
-    group_loan_product_description = models.TextField(null=True, blank=True)
-    group_loan_product_duration_days = models.IntegerField(null=True, blank=True)
-    group_loan_product_penalty_rate = models.FloatField( validators=[MinValueValidator(0.0), MaxValueValidator(99.9)], default=0.0)
-    group_loan_product_interest_rate = models.FloatField( validators=[MinValueValidator(0.0), MaxValueValidator(99.9)], default=0.0)
-    group_loan_product_type = models.CharField(max_length=length,null=True, blank=True)
-    group_loan_product_borrowing_percentage = models.FloatField( validators=[MinValueValidator(0.0), MaxValueValidator(99.9)], default=0.0)
-    group_loan_product_borrowing_times = models.IntegerField(null=True, blank=True)
-    create_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now_add = True)
 
-    def __str__(self):
-        return '%s' % self.loan_product_name
 
 
 class Loan(models.Model):
@@ -186,6 +221,7 @@ class Loan(models.Model):
     interest = models.FloatField( validators=[MinValueValidator(0.0), MaxValueValidator(99.9)], default=0.0)
     interest_rate = models.FloatField( validators=[MinValueValidator(0.0), MaxValueValidator(99.9)], default=0.0)
     loan_type = models.CharField(max_length=length,null=True, blank=True)
+    voucher = models.ForeignKey(Voucher, on_delete=models.CASCADE,null=True, blank=True)
     borrowing_percentage = models.FloatField( validators=[MinValueValidator(0.0), MaxValueValidator(99.9)], default=0.0)
     borrowing_times = models.IntegerField(null=True, blank=True)
     approved_date = models.CharField(max_length=length,null=True, blank=True)
@@ -224,35 +260,7 @@ class Penalty(models.Model):
         return '%s' % self.member_id
 
 
-class GroupUser(models.Model):
-    group_id = models.ForeignKey(Group, on_delete=models.CASCADE,null=True, blank=True)
-    first_name = models.CharField(max_length=length,null=True, blank=True)
-    last_name = models.CharField(max_length=length,null=True, blank=True)
-    email = models.CharField(max_length=length,null=True, blank=True)
-    password = models.CharField(max_length=length,null=True, blank=True)
-    phone = models.CharField(max_length=length,null=True, blank=True)
-    api_key = models.CharField(max_length=length,null=True, blank=True)
-    active = models.CharField(max_length=length,null=True, blank=True)
-    create_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now_add = True)
 
-    def __str__(self):
-        return '%s' % self.email
-    
-
-class Admin(models.Model):
-    first_name = models.CharField(max_length=length,null=True, blank=True)
-    last_name = models.CharField(max_length=length,null=True, blank=True)
-    email = models.CharField(max_length=length,null=True, blank=True)
-    password = models.CharField(max_length=length,null=True, blank=True)
-    phone = models.CharField(max_length=length,null=True, blank=True)
-    api_key = models.CharField(max_length=length,null=True, blank=True)
-    active = models.CharField(max_length=length,null=True, blank=True)
-    create_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now_add = True)
-
-    def __str__(self):
-        return '%s' % self.email
 
 
 class Email(models.Model):
@@ -295,18 +303,6 @@ class LoanReminder(models.Model):
 
 
 
-class Vendor(models.Model):
-    ward_id = models.ForeignKey(Ward, on_delete=models.CASCADE,null=True, blank=True)
-    business_name = models.CharField(max_length=length,null=True, blank=True)
-    shopping_centre_name = models.CharField(max_length=length,null=True, blank=True)
-    contact_person_name = models.CharField(max_length=length,null=True, blank=True)
-    contact_person_phone = models.CharField(max_length=length,null=True, blank=True)
-    contact_person_password = models.CharField(max_length=length,null=True, blank=True)
-    api_key = models.CharField(max_length=length,null=True, blank=True)
-    create_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now_add = True)
-    def __str__(self):
-        return '%s' % self.business_name
 
 
 class Product(models.Model):

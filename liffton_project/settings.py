@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'liffton_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'lifton',
+        'NAME': 'lifton2',
         'USER': 'admin',
         'PASSWORD': 'D@t@sc13nc3',
         'HOST': 'localhost',
@@ -132,10 +132,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+"""STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_URL='/my_media/'
-MEDIA_ROOT ='my_media/'
+MEDIA_ROOT ='my_media/'"""
+
+
+import os
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATICFILES_DIRS = [ 
+    os.path.join(BASE_DIR, 'staticfiles'),
+    ]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -147,3 +159,7 @@ CORS_ALLOW_HEADERS = ["*"]
 # CSRF_TRUSTED_ORIGINS
 CORS_ORIGIN_WHITELIST=['http://127.0.0.1:3000','http://127.0.0.1:3000','http://127.0.0.1','http://164.92.88.33','http://164.92.88.33']
 CSRF_TRUSTED_ORIGINS=['http://127.0.0.1:3000','http://127.0.0.1:3000','http://127.0.0.1','http://164.92.88.33','http://164.92.88.33']
+
+AUTH_USER_MODEL = "members.User" 
+LOGIN_REDIRECT_URL = 'member_dashboard'
+LOGIN_URL = 'login'

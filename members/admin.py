@@ -3,10 +3,8 @@ from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 from .models import *
 
-
-
 class MemberAdmin(ImportExportModelAdmin):
-    list_display = ("id", "first_name","last_name", "ward_id", "default_group_id")
+    list_display = ("id", "first_name","last_name", "ward_id")
     pass
 admin.site.register(Member, MemberAdmin)
 
@@ -55,10 +53,6 @@ class LoanProductAdmin(ImportExportModelAdmin):
     pass
 admin.site.register(LoanProduct, LoanProductAdmin)
 
-class GroupLoanProductAdmin(ImportExportModelAdmin):
-    list_display = ("id", "name","group_loan_product_description")
-    pass
-admin.site.register(GroupLoanProduct, GroupLoanProductAdmin)
 
 class LoanAdmin(ImportExportModelAdmin):
     list_display = ("id", "group_id","group_member_id", "amount", "status")
@@ -100,19 +94,6 @@ class ProductAdmin(ImportExportModelAdmin):
 admin.site.register(Product, ProductAdmin)
 
 
-class GroupUserAdmin(ImportExportModelAdmin):
-    list_display = ("id", "group_id", "first_name","email")
-    pass
-admin.site.register(GroupUser, GroupUserAdmin)
-
-
-
-
-
-class AdminAdmin(ImportExportModelAdmin):
-    list_display = ("id", "first_name","email")
-    pass
-admin.site.register(Admin, AdminAdmin)
 
 
 class EmailAdmin(ImportExportModelAdmin):

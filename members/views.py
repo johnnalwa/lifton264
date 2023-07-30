@@ -1,81 +1,109 @@
-from django.shortcuts import render,reverse,redirect,resolve_url
-
-# from django.http import HttpResponseRedirect
-from django.contrib.auth.views import LoginView,LogoutView
-from django.conf import settings
+from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import CreateView
-
-#from .forms import SignupForm,LoginForm,UpdateDefaultProfile,UpdateCustomProfile
-from django.contrib import messages
-#from customers.models import Customer
-#from orders.models import Order
-#from registers.models import Profile
-#from products.models import Product,HistConf
-from django.contrib.auth import authenticate, login, logout
+from .models import *
+from .forms import *
+from django.contrib.auth import login
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
-#from .decorators import unauthenticated_user, allowed_users, admin_only
-from django.http import HttpResponse, HttpResponseRedirect
-import json
-
-from django.views.generic import DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
-#from registers.filters import CustomerFilter
-
-# from datetime import datetime
-# from django.utils import timezone
-from datetime import datetime, timedelta
+from django.urls import reverse
+from .decorators import *
 
 
-# from django.contrib.auth.mixins import LoginRequiredMixin
+class LoginView(auth_views.LoginView):
+    form_class = LoginForm
+    template_name = 'login.html'
 
-# @allowed_users(allowed_roles=['admin'])
-#@login_required(login_url='/user/login/')
-# @admin_only
-def dashboard(request):
-	# customer = Customer.objects.get(pk=cid)
-	"""customers=Customer.objects.all()
-	total_customers=customers.count()
-	orders=Order.objects.all()
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
 
-	total_orders=orders.count()
-	products = Product.objects.all()
-	total_products = products.count()	
-	pending=orders.filter(status='Pending').count()#filter la choose(search)  garxa and all pending lai count garxa
-	delivered=orders.filter(status="Delivered").count()
- 
- 
-	myFilter = CustomerFilter(request.GET, queryset=customers)
-	customers = myFilter.qs #in jinja this customers goes
+    def get_success_url(self):
+        user = self.request.user
+        if user.is_authenticated:
+            if user.is_member:
+                return reverse('member_dashboard')
+            elif user.is_management:
+                return reverse('management_dashboard')
+            elif user.is_vendor:
+                return reverse('vendor_dashboard')
+            
+        else:
+            return reverse('login')
+        
 
-	# today_date = datetime.today()#filter every day order product for daily expenses	
 
-	# today_customers = customers.filter(date_created__year = today_date.year,date_created__month = today_date.month,
-	#                                 date_created__day = today_date.day).count()
-	
-	today_customers = customers.filter(date_created__gte = datetime.now() - timedelta(days=1)).count()#details of last 24 hours#b4 i also get same output using above line but now not so use this concept
-	# today_order = orders.filter(created_at__year = today_date.year,created_at__month = today_date.month,created_at__day = today_date.day)
-	today_order = orders.filter(created_at__gte = datetime.now() - timedelta(days=1))#A timedelta object represents a duration, the difference between two dates or times.
+class RegisterMemberView(CreateView):
+    model = User
+    form_class = MemberSignUpForm
+    template_name = 'member/register.html'
 
-	order_total_price=0.00
- 
-	for order in today_order:
-		per_total_price = float(order.product.price) * order.quantity
-		
-		order_total_price += per_total_price
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'member'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('login')
   
-	print(order_total_price)
-	# customer = Customer.objects.get(pk=cid) #but i need pk = cid(update)
-	# particular_customer_price=0.00
-	# for order in customer.order_set.all():
-	# 	per_total_price = float(order.product.price) * order.quantity
-	# 	particular_customer_price += per_total_price """
-	context={
-			"""'customers':customers,'orders_total_price':order_total_price,'total_orders':total_orders,
-   			'myFilter':myFilter,'today_customers':today_customers,'current_data':datetime.now(),
-			'orders_pending':pending,'orders_delivered':delivered,'total_products':total_products,'total_customers':total_customers"""
-			"data":1
-			}
-	
-	return render(request,'index.html',context)
+    
+class RegisterManagementView(CreateView):
+    model = User
+    form_class = ManagementSignUpForm
+    template_name = 'management/register.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'management'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('login')
+    
+
+class RegisterVendorView(CreateView):
+    model = User
+    form_class = VendorSignUpForm
+    template_name = 'vendor/register.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'vendor'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('login')
+
+
+#@login_required
+@member_required
+def MemberDashboard(request):
+    loans =  Loan.objects.filter(client=request.user.member)
+    context = {
+        'loans': loans
+    }
+    return render(request, 'member/dashboard.html', context)
+
+@login_required
+@management_required
+def ManagementDashboard(request):
+    loans =  Loan.objects.filter(client=request.user.management)
+    context = {
+        'loans': loans
+    }
+    return render(request, 'management/dashboard.html', context)
+
+
+@login_required
+@vendor_required
+def VendorDashboard(request):
+    loans =  Loan.objects.filter(client=request.user.vendor)
+    context = {
+        'loans': loans
+    }
+    return render(request, 'vendor/dashboard.html', context)
+
+
 

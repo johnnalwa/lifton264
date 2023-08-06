@@ -8,6 +8,22 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from .decorators import *
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+
+"""def logout_request(request):
+    logout(request)
+    messages.info(request, "Logged out successfully!")
+    return redirect("main:homepage")"""
+def login(request):
+    form = LoginForm
+    context = {
+        'form': form
+    }
+    return render(request, 'login.html', context)
+
+
+
 
 
 class LoginView(auth_views.LoginView):
@@ -43,7 +59,7 @@ class RegisterMemberView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        login(self.request, user)
+        #login(self.request, user)
         return redirect('login')
   
     
@@ -58,7 +74,7 @@ class RegisterManagementView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        login(self.request, user)
+        #login(self.request, user)
         return redirect('login')
     
 
@@ -73,14 +89,14 @@ class RegisterVendorView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        login(self.request, user)
+        #login(self.request, user)
         return redirect('login')
 
 
 #@login_required
 @member_required
 def MemberDashboard(request):
-    loans =  Loan.objects.filter(client=request.user.member)
+    loans =  Loan.objects.filter(group_member_id=request.user.member)
     context = {
         'loans': loans
     }

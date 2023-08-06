@@ -7,16 +7,17 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class MemberSignUpForm(UserCreationForm):
-    email = forms.EmailField(widget=forms.EmailInput())
-    password1 = forms.CharField(label=("Password"), widget=forms.PasswordInput())
-    password2 = forms.CharField(label=("Confirm Password"), widget=forms.PasswordInput())
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control radius-30 ps-5"}), label=("Email"))
+    username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label=("Username"))
+    password1 = forms.CharField(label=("Password"), widget=forms.PasswordInput(attrs={"class": "form-control radius-30 ps-5"}))
+    password2 = forms.CharField(label=("Confirm Password"), widget=forms.PasswordInput(attrs={"class": "form-control radius-30 ps-5"}))
 
-    first_name = forms.CharField(widget=forms.TextInput())
-    last_name = forms.CharField(widget=forms.TextInput())
+    first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label="First Name")
+    last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label="Last Name")
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2', 'first_name', 'last_name')
     
     @transaction.atomic
     def save(self, commit=True):
@@ -30,16 +31,17 @@ class MemberSignUpForm(UserCreationForm):
 
 
 class ManagementSignUpForm(UserCreationForm):
-    email = forms.EmailField(widget=forms.EmailInput())
-    password1 = forms.CharField(label=("Password"), widget=forms.PasswordInput())
-    password2 = forms.CharField(label=("Confirm Password"), widget=forms.PasswordInput())
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control radius-30 ps-5"}), label=("Email"))
+    username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label=("Username"))
+    password1 = forms.CharField(label=("Password"), widget=forms.PasswordInput(attrs={"class": "form-control radius-30 ps-5"}))
+    password2 = forms.CharField(label=("Confirm Password"), widget=forms.PasswordInput(attrs={"class": "form-control radius-30 ps-5"}))
 
-    first_name = forms.CharField(widget=forms.TextInput())
-    last_name = forms.CharField(widget=forms.TextInput())
+    first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label="First Name")
+    last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label="Last Name")
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2', 'first_name', 'last_name')
     
     @transaction.atomic
     def save(self, commit=True):
@@ -54,16 +56,17 @@ class ManagementSignUpForm(UserCreationForm):
 
 
 class CountySignUpForm(UserCreationForm):
-    email = forms.EmailField(widget=forms.EmailInput())
-    password1 = forms.CharField(label=("Password"), widget=forms.PasswordInput())
-    password2 = forms.CharField(label=("Confirm Password"), widget=forms.PasswordInput())
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control radius-30 ps-5"}), label=("Email"))
+    username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label=("Username"))
+    password1 = forms.CharField(label=("Password"), widget=forms.PasswordInput(attrs={"class": "form-control radius-30 ps-5"}))
+    password2 = forms.CharField(label=("Confirm Password"), widget=forms.PasswordInput(attrs={"class": "form-control radius-30 ps-5"}))
 
-    first_name = forms.CharField(widget=forms.TextInput())
-    last_name = forms.CharField(widget=forms.TextInput())
+    first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label="First Name")
+    last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label="Last Name")
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2', 'first_name', 'last_name')
     
     @transaction.atomic
     def save(self, commit=True):
@@ -75,16 +78,17 @@ class CountySignUpForm(UserCreationForm):
         return user
     
 class VendorSignUpForm(UserCreationForm):
-    email = forms.EmailField(widget=forms.EmailInput())
-    password1 = forms.CharField(label=("Password"), widget=forms.PasswordInput())
-    password2 = forms.CharField(label=("Confirm Password"), widget=forms.PasswordInput())
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control radius-30 ps-5"}), label=("Email"))
+    username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label=("Username"))
+    password1 = forms.CharField(label=("Password"), widget=forms.PasswordInput(attrs={"class": "form-control radius-30 ps-5"}))
+    password2 = forms.CharField(label=("Confirm Password"), widget=forms.PasswordInput(attrs={"class": "form-control radius-30 ps-5"}))
 
-    first_name = forms.CharField(widget=forms.TextInput())
-    last_name = forms.CharField(widget=forms.TextInput())
+    first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label="First Name")
+    last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label="Last Name")
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2', 'first_name', 'last_name')
     
     @transaction.atomic
     def save(self, commit=True):
@@ -99,8 +103,9 @@ class VendorSignUpForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput())
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control radius-30 ps-5"}), label=("Username"))
+    password = forms.CharField(label=("Password"), widget=forms.PasswordInput(attrs={"class": "form-control radius-30 ps-5"}))
+   
     
 
 

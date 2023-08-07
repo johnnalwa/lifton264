@@ -87,7 +87,7 @@ class RegisterVendorView(CreateView):
         return redirect('login')
 
 
-#@login_required
+@login_required
 @member_required
 def MemberDashboard(request):
     loans =  Loan.objects.filter(group_member_id=request.user.member)
@@ -99,7 +99,7 @@ def MemberDashboard(request):
 @login_required
 @management_required
 def ManagementDashboard(request):
-    loans =  Loan.objects.filter(client=request.user.management)
+    loans =  Loan.objects.filter(group_member_id=request.user.management)
     context = {
         'loans': loans
     }
@@ -109,7 +109,7 @@ def ManagementDashboard(request):
 @login_required
 @vendor_required
 def VendorDashboard(request):
-    loans =  Loan.objects.filter(client=request.user.vendor)
+    loans =  Loan.objects.filter(group_member_id=request.user.vendor)
     context = {
         'loans': loans
     }

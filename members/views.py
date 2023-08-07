@@ -11,19 +11,13 @@ from .decorators import *
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
-"""def logout_request(request):
-    logout(request)
-    messages.info(request, "Logged out successfully!")
-    return redirect("main:homepage")"""
+
 def login(request):
     form = LoginForm
     context = {
         'form': form
     }
     return render(request, 'login.html', context)
-
-
-
 
 
 class LoginView(auth_views.LoginView):

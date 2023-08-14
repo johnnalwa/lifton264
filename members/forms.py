@@ -53,6 +53,29 @@ class ManagementSignUpForm(UserCreationForm):
         return user
     
 
+class CreateGroupForm(forms.ModelForm):
+    name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Group Name"))
+    special_code = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Special Code"))
+    group_type = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Group Type"))
+    ward_id = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Ward"))
+    business_activity = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Busines Activity"))
+    bank_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Bank Name"))
+    bank_services = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Bank Services"))
+    mpesa_paybill = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Mpesa Paybill"))
+    mpesa_busines_number = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Mpesa Business Number"))
+    mpesa_account_number = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Mpesa Account Number"))
+    secretary_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Secretary Name"))
+    secretary_phone = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Secretary Phone"))
+    opportunity = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), label=("Opportunity"))  
+
+    class Meta:
+        model = Group
+        fields = ['name', 'special_code', 'group_type', 'ward_id', 'business_activity', 'bank_name', 'bank_services', 'mpesa_paybill', 'mpesa_busines_number', 'mpesa_account_number', 'secretary_name', 'secretary_phone', 'opportunity'] 
+
+
+
+
+
 
 
 class CountySignUpForm(UserCreationForm):

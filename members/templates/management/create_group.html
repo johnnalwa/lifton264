@@ -1,0 +1,149 @@
+{% extends 'management/base.html' %}
+{% load static %} 
+
+{% block content %}
+
+
+<hr>
+<main class="page-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Registeration</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Groups</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="ms-auto">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Settings</button>
+                <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
+                    <a class="dropdown-item" href="javascript:;">Another action</a>
+                    <a class="dropdown-item" href="javascript:;">Something else here</a>
+                    <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+
+
+    <div class="row">
+        <div class="col-xl-9 mx-auto">
+            <h6 class="mb-0 text-uppercase">Register a Group</h6>
+            <hr>
+            <div class="card">
+                <div class="card-body">
+                    <div class="border p-4 rounded">
+                        <div class="card-title d-flex align-items-center">
+                            <h5 class="mb-0">Group Details</h5>
+                        </div>
+                        <hr>
+                        <form class="form-body" action="{% url 'creategroup' %}"  method="POST">
+                            {% csrf_token %}
+                        <div class="row mb-3">
+                            <label for="inputEnterYourName" class="col-sm-3 col-form-label">Group Name</label>
+                            <div class="col-sm-9">
+                                {{ form.name }} 
+                                   </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPhoneNo2" class="col-sm-3 col-form-label">Special Code</label>
+                            <div class="col-sm-9">
+                                {{ form.special_code }} 
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmailAddress2" class="col-sm-3 col-form-label">Group Type</label>
+                            <div class="col-sm-9">
+                                {{ form.group_type }} 
+                             
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputChoosePassword2" class="col-sm-3 col-form-label">Ward</label>
+                            <div class="col-sm-9">
+                                {{ form.ward_id }} 
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputConfirmPassword2" class="col-sm-3 col-form-label">Business Activity</label>
+                            <div class="col-sm-9">
+                                {{ form.business_activity }} 
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputChoosePassword2" class="col-sm-3 col-form-label">Opportunity</label>
+                            <div class="col-sm-9">
+                                {{ form.opportunity }} 
+                            </div>
+                        </div>
+                       
+                        <div class="row mb-3">
+                            <label for="inputChoosePassword2" class="col-sm-3 col-form-label">Mpesa Paybill</label>
+                            <div class="col-sm-9">
+                                {{ form.mpesa_paybill }} 
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputChoosePassword2" class="col-sm-3 col-form-label">Mpesa Business Number</label>
+                            <div class="col-sm-9">
+                                {{ form.mpesa_busines_number }} 
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputChoosePassword2" class="col-sm-3 col-form-label">Mpesa Account Number</label>
+                            <div class="col-sm-9">
+                                {{ form.mpesa_account_number }} 
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputChoosePassword2" class="col-sm-3 col-form-label">Secretary Name</label>
+                            <div class="col-sm-9">
+                                {{ form.secretary_name }} 
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputChoosePassword2" class="col-sm-3 col-form-label">Secretary Phone Number</label>
+                            <div class="col-sm-9">
+                                {{ form.secretary_phone }} 
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <label for="inputAddress4" class="col-sm-3 col-form-label">Bank Name</label>
+                            <div class="col-sm-9">
+                                {{ form.bank_name }} 
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputAddress4" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck4">
+                                    <label class="form-check-label" for="gridCheck4">Publish</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <button type="submit" class="btn btn-primary px-5">Register Group</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end row-->
+</main>
+
+{% endblock %}

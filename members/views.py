@@ -72,6 +72,10 @@ class RegisterManagementView(CreateView):
         return redirect('login')
     
 
+
+
+
+
 class RegisterVendorView(CreateView):
     model = User
     form_class = VendorSignUpForm
@@ -128,4 +132,20 @@ def VendorDashboard(request):
     return render(request, 'vendor/dashboard.html', context)
 
  
+def CreateGroup(request):
+    model = Group
+    form_class = CreateGroupForm
+    template_name = 'management/creategroup.html' 
 
+    def form_valid(self, form):
+        group = form.save()
+        #login(self.request, user)
+        return redirect('creategroup')
+
+def CreateGroup(request):
+    #model = Group
+    form = CreateGroupForm
+    context = {
+        'form':form
+    } 
+    return render(request, "management/create_group.html", context)

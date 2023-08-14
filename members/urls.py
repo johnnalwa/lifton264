@@ -13,6 +13,7 @@ urlpatterns = [
     
     path('management/dashboard/',views.ManagementDashboard, name="management_dashboard"),
     path('management/register/',views.RegisterManagementView.as_view(), name="register_management"),
+    path('management/creategroup/',views.CreateGroup, name="creategroup"),
        
     path('vendor/dashboard/',views.VendorDashboard, name="vendor_dashboard"),
     path('vendor/register/',views.RegisterVendorView.as_view(), name="register_vendor"),

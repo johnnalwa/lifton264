@@ -115,5 +115,5 @@ def VendorDashboard(request):
     }
     return render(request, 'vendor/dashboard.html', context)
 
-
+ 
 

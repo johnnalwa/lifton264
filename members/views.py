@@ -90,18 +90,18 @@ class RegisterVendorView(CreateView):
 @login_required
 @member_required
 def MemberDashboard(request):
-    loans =  Loan.objects.filter(group_member_id=request.user.member)
+    #loans =  Loan.objects.filter(group_member_id=request.user.member)
     context = {
-        'loans': loans
+        'loans': 0
     }
     return render(request, 'member/dashboard.html', context)
 
 @login_required
 @management_required
 def ManagementDashboard(request):
-    loans =  Loan.objects.filter(group_member_id=request.user.management)
+    #loans =  Loan.objects.filter(group_member_id=request.user.member)
     context = {
-        'loans': loans
+        'loans': 0
     }
     return render(request, 'management/dashboard.html', context)
 
@@ -109,9 +109,9 @@ def ManagementDashboard(request):
 @login_required
 @vendor_required
 def VendorDashboard(request):
-    loans =  Loan.objects.filter(group_member_id=request.user.vendor)
+    #loans =  Loan.objects.filter(group_member_id=request.user.member)
     context = {
-        'loans': loans
+        'loans': 0
     }
     return render(request, 'vendor/dashboard.html', context)
 

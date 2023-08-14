@@ -99,9 +99,21 @@ def MemberDashboard(request):
 @login_required
 @management_required
 def ManagementDashboard(request):
+   # message_count = models.Messages.objects.filter(username='username', status=0).count()
+    totalgroups = Group.objects.all().count()
+    totalfarmers = Member.objects.all().count()
+    totalloanproducts = LoanProduct.objects.all().count()
+    totalproducts = Product.objects.all().count()
+    activepenalties = Penalty.objects.all().count()
+    totalvendors = Vendor.objects.all().count()
     #loans =  Loan.objects.filter(group_member_id=request.user.member)
     context = {
-        'loans': 0
+        'totalgroups': totalgroups,
+        'totalfarmers': totalfarmers,
+        'totalloanproducts': totalloanproducts,
+        'totalproducts': totalproducts,
+        'activepenalties': activepenalties,
+        'totalvendors': totalvendors,
     }
     return render(request, 'management/dashboard.html', context)
 

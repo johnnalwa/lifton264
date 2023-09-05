@@ -3,13 +3,14 @@ from django.shortcuts import redirect, render
 from django.views.generic import CreateView
 from .models import *
 from .forms import *
-from django.contrib.auth import login
+from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from .decorators import *
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 def login(request):
@@ -91,8 +92,8 @@ class RegisterVendorView(CreateView):
         return redirect('login')
 
 
-@login_required
-@member_required
+# @login_required
+# @member_required
 def MemberDashboard(request):
     #loans =  Loan.objects.filter(group_member_id=request.user.member)
     context = {
@@ -100,8 +101,8 @@ def MemberDashboard(request):
     }
     return render(request, 'member/dashboard.html', context)
 
-@login_required
-@management_required
+# @login_required
+# @management_required
 def ManagementDashboard(request):
    # message_count = models.Messages.objects.filter(username='username', status=0).count()
     totalgroups = Group.objects.all().count()
@@ -122,8 +123,8 @@ def ManagementDashboard(request):
     return render(request, 'management/dashboard.html', context)
 
 
-@login_required
-@vendor_required
+# @login_required
+# @vendor_required
 def VendorDashboard(request):
     #loans =  Loan.objects.filter(group_member_id=request.user.member)
     context = {
@@ -139,7 +140,7 @@ def CreateGroup(request):
 
     def form_valid(self, form):
         group = form.save()
-        #login(self.request, user)
+        login(self.request, user)
         return redirect('creategroup')
 
 def CreateGroup(request):
@@ -149,3 +150,15 @@ def CreateGroup(request):
         'form':form
     } 
     return render(request, "management/create_group.html", context)
+
+def password_change_view(request):
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Update the session with the new user object
+            return redirect('change_done')  # Redirect to a success page
+    else:
+        form = CustomPasswordChangeForm(request.user)
+    
+    return render(request, 'password_update.html', {'form': form})

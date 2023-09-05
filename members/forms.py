@@ -1,8 +1,9 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.db import transaction
 from .models import *
 from django import forms
 from django.contrib.auth import get_user_model
+
 
 User = get_user_model()
 
@@ -226,3 +227,8 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Vendor
         fields = ("__all__" )
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    pass
+        

@@ -85,16 +85,29 @@ WSGI_APPLICATION = 'liffton_project.wsgi.application'
 
  
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'lifton2',
+#         'USER': 'admin',
+#         'PASSWORD': 'D@t@sc13nc3',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lifton2',
-        'USER': 'admin',
-        'PASSWORD': 'D@t@sc13nc3',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '3306',
     }
 }
+
 
 
 

@@ -144,7 +144,7 @@ def CreateGroup(request):
         return redirect('creategroup')
 
 def CreateGroup(request):
-    #model = Group
+    model = Group
     form = CreateGroupForm
     context = {
         'form':form
@@ -162,3 +162,92 @@ def password_change_view(request):
         form = CustomPasswordChangeForm(request.user)
     
     return render(request, 'password_update.html', {'form': form})
+
+
+def apply_loan(request):
+    if request.method == 'POST':
+        form = LoanForm(request.POST)
+        if form.is_valid():
+            # Process the loan application data and save it to the database
+            # Redirect to a thank you page or another appropriate page
+            return redirect('success')
+    else:
+        form = LoanForm()
+    
+    return render(request, 'loans.html', {'form': form})
+
+def repay_loan(request):
+    if request.method == 'POST':
+        form = LoanRepaymentForm(request.POST)
+        if form.is_valid():
+            # Process the form data (e.g., update loan repayment status)
+            
+
+            return redirect('loan_repayment_success')  # Redirect to a success 
+    else:
+        form = LoanRepaymentForm()
+
+    context = {'form': form}
+    return render(request, 'repayment.html', context)
+
+def penalty_form(request):
+    if request.method == 'POST':
+        form = PenaltyForm(request.POST)
+        if form.is_valid():
+            # Save the form data to the database
+            form.save()
+            return redirect('penalty_form_success')  # Redirect to a success page
+    else:
+        form = PenaltyForm()
+
+    return render(request, 'penalty_form.html', {'form': form})
+
+def create_group_announcement(request):
+    if request.method == 'POST':
+        form = GroupAnnouncementForm(request.POST)
+        if form.is_valid():
+            # Save the form data to the database
+            group_announcement = form.save()
+            # Redirect to a success page or display a success message
+            return redirect('success_page') 
+    else:
+        form = GroupAnnouncementForm()
+
+    return render(request, 'group_announcement_form.html', {'form': form})
+
+def create_loan_reminder(request):
+    if request.method == 'POST':
+        form = LoanReminderForm(request.POST)
+        if form.is_valid():
+            # Save the form data to the database
+            loan_reminder = form.save()
+            # Redirect to a success page or display a success message
+            return redirect('success_page') 
+    else:
+        form = LoanReminderForm()
+
+    return render(request, 'loan_reminder_form.html', {'form': form})
+
+def vendor_form_view(request):
+    if request.method == 'POST':
+        form = VendorForm(request.POST)
+        if form.is_valid():
+            # Process form data and save to the database
+            form.save()
+            # Redirect to a success page or do something else
+    else:
+        form = VendorForm()
+
+    return render(request, 'vendor_form.html', {'form': form})
+
+def product_form_view(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            # Process form data and save to the database
+            form.save()
+            # Redirect to a success page or do something else
+    else:
+        form = ProductForm()
+
+    return render(request, 'product_form.html', {'form': form})

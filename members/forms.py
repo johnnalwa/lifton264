@@ -166,7 +166,7 @@ class VoucherForm(forms.ModelForm):
         fields = ("__all__" )
 
 class LoanProductForm(forms.ModelForm):
-   # question = forms.CharField(widget=forms.Textarea())
+    question = forms.CharField(widget=forms.Textarea())
 
     class Meta:
         model = LoanProduct
@@ -176,7 +176,7 @@ class LoanProductForm(forms.ModelForm):
 
 
 class LoanForm(forms.ModelForm):
-   # question = forms.CharField(widget=forms.Textarea())
+    # question = forms.CharField(widget=forms.Textarea())
 
     class Meta:
         model = Loan
@@ -184,7 +184,7 @@ class LoanForm(forms.ModelForm):
 
 
 class LoanRepaymentForm(forms.ModelForm):
-   # question = forms.CharField(widget=forms.Textarea())
+    # question = forms.CharField(widget=forms.Textarea())
 
     class Meta:
         model = LoanRepayment

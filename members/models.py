@@ -318,3 +318,14 @@ class Product(models.Model):
 
     def __str__(self):
         return '%s' % self.name
+    
+    
+class Training(models.Model):
+    group_name = models.CharField(max_length=100)
+    members = models.PositiveIntegerField()
+    name = models.CharField(max_length=100)
+    gender = models.CharField(max_length=10)
+    age = models.PositiveIntegerField()
+    training_date = models.DateField()
+    topic_trained = models.CharField(max_length=100)
+    training_photos = models.ImageField(upload_to='training_photos/')

@@ -232,3 +232,8 @@ class ProductForm(forms.ModelForm):
 class CustomPasswordChangeForm(PasswordChangeForm):
     pass
         
+        
+class TrainingForm(forms.ModelForm):
+    class Meta:
+        model = Training
+        fields = '__all__'

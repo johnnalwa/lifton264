@@ -251,3 +251,21 @@ def product_form_view(request):
         form = ProductForm()
 
     return render(request, 'product_form.html', {'form': form})
+
+def trainings_page(request):
+    if request.method == 'POST':
+        form = TrainingForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('trainings_page')  # Redirect to the same page after submission
+    else:
+        form = TrainingForm()
+
+    trainings = Training.objects.all()
+
+    context = {
+        'form': form,
+        'trainings': trainings,
+    }
+
+    return render(request, 'management/trainings_page.html', context)

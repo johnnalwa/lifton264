@@ -30,6 +30,9 @@ urlpatterns = [
     
     path('password_change/', views.password_change_view, name='password_change'),
     # path('password_change/done/', views.change_done, name='change_done'),
+    
+    path('management/trainings/', views.trainings_page, name='trainings_page'),
+
 ]
 
 

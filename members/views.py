@@ -302,3 +302,6 @@ def create_article(request):
 def list_groups(request):
     groups = Group.objects.all()  # Fetch all groups from the database
     return render(request, 'management/list_groups.html', {'groups': groups})
+
+def weather_page(request):
+    return render(request, 'management/weather_page.html')

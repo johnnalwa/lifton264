@@ -1,0 +1,35 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<hr>
+<main class="page-content">
+
+
+  <h1>Articles</h1>
+  
+  <!-- List of articles -->
+  <ul>
+    {% for article in articles %}
+      <li>
+        <a href="{% url 'article_list' article.id %}">{{ article.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  
+  <!-- Selected article details -->
+  {% if selected_article %}
+    <!-- Display selected article details as before -->
+  {% endif %}
+  
+  <!-- Article creation form -->
+  <h2>Create Article</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ article_form.as_p }}
+    <button type="submit">Create</button>
+  </form>
+  
+</main>
+{% endblock %}

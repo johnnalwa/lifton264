@@ -269,3 +269,36 @@ def trainings_page(request):
     }
 
     return render(request, 'management/trainings_page.html', context)
+
+def article_list(request, article_id=None):
+    articles = Article.objects.all().order_by('-publish_date')
+    selected_article = None
+
+    if article_id:
+        selected_article = get_object_or_404(Article, pk=article_id)
+
+    return render(request, 'articles/article_list.html', {
+        'articles': articles,
+        'selected_article': selected_article,
+        'article_form': ArticleForm(),  # Include an empty form
+    })
+
+def create_article(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_article = form.save(commit=False)
+            new_article.author = request.user  # Set the author to the current user
+            new_article.save()
+            return redirect('article_list')
+
+    # If the form is invalid or it's a GET request, render the form
+    return render(request, 'management/article_list.html', {
+        'articles': Article.objects.all().order_by('-publish_date'),
+        'article_form': ArticleForm(),
+    })
+    
+    
+def list_groups(request):
+    groups = Group.objects.all()  # Fetch all groups from the database
+    return render(request, 'management/list_groups.html', {'groups': groups})

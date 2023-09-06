@@ -24,6 +24,7 @@ urlpatterns = [
     path('management/dashboard/',views.ManagementDashboard, name="management_dashboard"),
     path('management/register/',views.RegisterManagementView.as_view(), name="register_management"),
     path('management/creategroup/',views.CreateGroup, name="creategroup"),
+    path('management/list-groups/', views.list_groups, name='list_groups'),
        
     path('vendor/dashboard/',views.VendorDashboard, name="vendor_dashboard"),
     path('vendor/register/',views.RegisterVendorView.as_view(), name="register_vendor"),
@@ -32,6 +33,9 @@ urlpatterns = [
     # path('password_change/done/', views.change_done, name='change_done'),
     
     path('management/trainings/', views.trainings_page, name='trainings_page'),
+    path('management/articles/', views.article_list, name='articles_list'),
+    
+
 
 ]
 

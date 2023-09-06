@@ -329,3 +329,14 @@ class Training(models.Model):
     training_date = models.DateField()
     topic_trained = models.CharField(max_length=100)
     training_photos = models.ImageField(upload_to='training_photos/')
+    
+
+class Article(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)  # Set default to None or your preferred default user
+    publish_date = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+    document = models.FileField(upload_to='articles/documents/', blank=True, null=True)
+
+    def __str__(self):
+        return self.title

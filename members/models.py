@@ -324,11 +324,14 @@ class Training(models.Model):
     group_name = models.CharField(max_length=100)
     members = models.PositiveIntegerField()
     name = models.CharField(max_length=100)
-    gender = models.CharField(max_length=10)
+    gender = models.CharField(max_length=10, choices=[('male', 'Male'), ('female', 'Female')])
     age = models.PositiveIntegerField()
     training_date = models.DateField()
     topic_trained = models.CharField(max_length=100)
     training_photos = models.ImageField(upload_to='training_photos/')
+
+    def __str__(self):
+        return self.name
     
 
 class Article(models.Model):

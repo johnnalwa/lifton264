@@ -35,6 +35,10 @@ urlpatterns = [
     path('management/trainings/', views.trainings_page, name='trainings_page'),
     path('management/articles/', views.article_page, name='articles_page'),
     path('management/weather/', views.weather_page, name='weather_page'),
+    
+    path('management/counties/', views. county_list, name='county_list'),
+    path('subcounties/', views.subcounty_list, name='subcounty_list'),
+    path('wards/', views.ward_list, name='ward_list'),
 
     
 

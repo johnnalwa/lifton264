@@ -293,3 +293,15 @@ def list_groups(request):
 
 def weather_page(request):
     return render(request, 'management/weather_page.html')
+
+def county_list(request):
+    counties = County.objects.all()
+    return render(request, 'county_list.html', {'counties': counties})
+
+def subcounty_list(request):
+    subcounties = SubCounty.objects.all()
+    return render(request, 'subcounty_list.html', {'subcounties': subcounties})
+
+def ward_list(request):
+    wards = Ward.objects.all()
+    return render(request, 'ward_list.html', {'wards': wards})

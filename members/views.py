@@ -11,6 +11,7 @@ from .decorators import *
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
+from django.http import JsonResponse
 
 
 def login(request):
@@ -132,6 +133,11 @@ def VendorDashboard(request):
     }
     return render(request, 'vendor/dashboard.html', context)
 
+def list_vendors(request):
+    # Your logic to generate the dynamic content goes here
+    dynamic_content = "This is the vendor list."
+    return JsonResponse({'content': dynamic_content})
+
  
 def CreateGroup(request):
     model = Group
@@ -240,17 +246,21 @@ def vendor_form_view(request):
 
     return render(request, 'vendor_form.html', {'form': form})
 
-def product_form_view(request):
+
+def add_product(request):
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            # Process form data and save to the database
             form.save()
-            # Redirect to a success page or do something else
+            return redirect('product_list')  # Redirect to the product list page after adding a product
     else:
         form = ProductForm()
+    
+    return render(request, 'vendor/add_product.html', {'form': form})
 
-    return render(request, 'product_form.html', {'form': form})
+def product_list(request):
+    products = Product.objects.all()
+    return render(request, 'product_list.html', {'products': products})
 
 def trainings_page(request):
     if request.method == 'POST':

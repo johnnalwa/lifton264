@@ -1,0 +1,40 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<hr>
+<main class="page-content">
+<thead>
+    <tr>
+        <th>Vendor Name</th>
+        <th>Contact Info</th>
+        <!-- Add more table headers as needed -->
+    </tr>
+</thead>
+<tbody>
+    {% for vendor in vendors %}
+    <tr>
+        <td>{{ vendor.name }}</td>
+        <td>{{ vendor.contact }}</td>
+        <!-- Add more table cells as needed -->
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+<script>
+const link = document.getElementById("showVendors");
+const contentContainer = document.getElementById("content");
+const table = document.getElementById("vendorTable");
+
+link.addEventListener("click", function(e) {
+    e.preventDefault();
+
+    // Display the table
+    table.style.display = 'table';
+});
+</script>
+
+</main>
+{% endblock %}

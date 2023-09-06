@@ -283,20 +283,8 @@ def article_list(request, article_id=None):
         'article_form': ArticleForm(),  # Include an empty form
     })
 
-def create_article(request):
-    if request.method == 'POST':
-        form = ArticleForm(request.POST, request.FILES)
-        if form.is_valid():
-            new_article = form.save(commit=False)
-            new_article.author = request.user  # Set the author to the current user
-            new_article.save()
-            return redirect('article_list')
-
-    # If the form is invalid or it's a GET request, render the form
-    return render(request, 'management/article_list.html', {
-        'articles': Article.objects.all().order_by('-publish_date'),
-        'article_form': ArticleForm(),
-    })
+def article_page(request):
+    return render(request, 'management/article_page.html')
     
     
 def list_groups(request):

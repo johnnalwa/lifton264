@@ -33,7 +33,7 @@ urlpatterns = [
     # path('password_change/done/', views.change_done, name='change_done'),
     
     path('management/trainings/', views.trainings_page, name='trainings_page'),
-    path('management/articles/', views.article_list, name='articles_list'),
+    path('management/articles/', views.article_page, name='articles_page'),
     path('management/weather/', views.weather_page, name='weather_page'),
 
     

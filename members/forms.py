@@ -225,7 +225,7 @@ class ProductForm(forms.ModelForm):
    # question = forms.CharField(widget=forms.Textarea())
 
     class Meta:
-        model = Vendor
+        model = Product
         fields = ("__all__" )
 
 

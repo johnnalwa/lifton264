@@ -252,11 +252,11 @@ def add_product(request):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('product_list')  # Redirect to the product list page after adding a product
+            return redirect('product_list')  # Redirect to a success page or any other desired page
     else:
         form = ProductForm()
-    
-    return render(request, 'vendor/add_product.html', {'form': form})
+
+    return render(request, 'management/add_product.html', {'form': form})
 
 def product_list(request):
     products = Product.objects.all()

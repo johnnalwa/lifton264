@@ -17,7 +17,7 @@ urlpatterns = [
     path('create_group_announcement/', views.create_group_announcement, name='create_group_announcement'),
     path('create_loan_reminder/', views.create_loan_reminder, name='create_loan_reminder'),
     path('vendor/add/', views.vendor_form_view, name='vendor_form'),
-    path('vendor/product_add/', views.add_product, name='product_add'),
+    path('management/add_product/', views.add_product, name='add_product'),
     path('list_vendors/', views.list_vendors, name='list_vendors'),
     path('products/', views.product_list, name='product_list'),
 

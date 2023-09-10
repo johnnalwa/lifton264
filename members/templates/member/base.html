@@ -285,7 +285,7 @@
                     </div>
                     <small class="mb-0">System summaries</small>
                   </div>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-cart-plus"></i>Register New Group</a>
+                  <a href="{% url 'creategroup' %}"  class="list-group-item"><i class="bi bi-cart-plus"></i>Register New Group</a>
                 
                 </div>
               </div>
@@ -313,8 +313,8 @@
                   </div>
                   <a href="3" class="list-group-item"><i class="bi bi-box"></i>List Vendors</a>
                   <a href="i.html" class="list-group-item"><i class="bi bi-bar-chart"></i>Add Vendor</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bar-chart"></i>List Products</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bar-chart"></i>Add Product</a>
+                  <a href="{% url 'product_list'%}"  class="list-group-item"><i class="bi bi-bar-chart"></i>List Products</a>
+                  <a href="{% url 'add_product' %}" class="list-group-item"><i class="bi bi-bar-chart"></i>Add Product</a>
                   <a href="i.html" class="list-group-item"><i class="bi bi-bar-chart"></i>Categories</a>
                 </div>
               </div>
@@ -340,8 +340,8 @@
                     </div>
                     <small class="mb-0">Manage Groups</small>
                   </div>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>List Groups</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>Add New Group</a>
+                  <a href="{% url 'list_groups' %}" class="list-group-item"><i class="bi bi-bell"></i>List Groups</a>
+                  <a href="{% url 'creategroup' %}"  class="list-group-item"><i class="bi bi-bell"></i>Add New Group</a>
                  
                 </div>
               </div>
@@ -353,9 +353,9 @@
                     </div>
                     <small class="mb-0">Manage resources</small>
                   </div>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>Articles</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>Trainings</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>Weather</a>
+                  <a href="{% url 'articles_page' %}" class="list-group-item"><i class="bi bi-bell"></i>Articles</a>
+                  <a href="{% url 'trainings_page' %}" class="list-group-item"><i class="bi bi-bell"></i>Trainings</a>
+                  <a href="{% url 'weather_page' %}" class="list-group-item"><i class="bi bi-bell"></i>Weather</a>
                 </div>
               </div>
               <div class="tab-pane fade" id="pills-tables">
@@ -378,10 +378,10 @@
                     </div>
                     <small class="mb-0">manage settings</small>
                   </div>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>Counties</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>Sub Counties</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>Wards</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>Change Password</a>
+                  <a href="{% url 'county_list'%}"  class="list-group-item"><i class="bi bi-bell"></i>Counties</a>
+                  <a href="{% url 'subcounty_list' %}" class="list-group-item"><i class="bi bi-bell"></i>Sub Counties</a>
+                  <a href="{% url 'ward_list' %}" class="list-group-item"><i class="bi bi-bell"></i>Wards</a>
+                  <a href="{% url 'password_change' %}" class="list-group-item"><i class="bi bi-bell"></i>Change Password</a>
                 </div>
               </div>
               <div class="tab-pane fade" id="pills-icons">

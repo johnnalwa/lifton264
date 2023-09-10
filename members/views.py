@@ -124,8 +124,8 @@ def ManagementDashboard(request):
     return render(request, 'management/dashboard.html', context)
 
 
-# @login_required
-# @vendor_required
+@login_required
+@vendor_required
 def VendorDashboard(request):
     #loans =  Loan.objects.filter(group_member_id=request.user.member)
     context = {

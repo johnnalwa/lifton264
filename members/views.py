@@ -133,11 +133,10 @@ def VendorDashboard(request):
     }
     return render(request, 'vendor/dashboard.html', context)
 
-@login_required
+# @login_required
 def list_vendors(request):
-    # Your logic to generate the dynamic content goes here
-    dynamic_content = "This is the vendor list."
-    return JsonResponse({'content': dynamic_content})
+    vendors = Vendor.objects.all()
+    return render(request, 'list_vendors.html', {'vendors': vendors})
 
 @login_required
 @management_required
@@ -201,6 +200,10 @@ def repay_loan(request):
 
     context = {'form': form}
     return render(request, 'repayment.html', context)
+
+def loan_list(request):
+    loans = Loan.objects.all()
+    return render(request, 'management/loan_list.html', {'loans': loans})
 
 @login_required
 def penalty_form(request):
@@ -293,18 +296,18 @@ def trainings_page(request):
     return render(request, 'management/trainings_page.html', context)
 
 @login_required
-def article_list(request, article_id=None):
+def upload_article(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('upload_article')  
+    else:
+        form = ArticleForm()
+    
     articles = Article.objects.all().order_by('-publish_date')
-    selected_article = None
+    return render(request, 'management/upload_article.html', {'form': form, 'articles': articles})
 
-    if article_id:
-        selected_article = get_object_or_404(Article, pk=article_id)
-
-    return render(request, 'articles/article_list.html', {
-        'articles': articles,
-        'selected_article': selected_article,
-        'article_form': ArticleForm(),  # Include an empty form
-    })
 
 @login_required
 def article_page(request):

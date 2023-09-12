@@ -12,6 +12,7 @@ urlpatterns = [
     path('member/register/',views.RegisterMemberView.as_view(), name="register_member"),
     
     path('applyloan/', views.apply_loan, name='applyloan'),
+    path('management/loan-list/', views.loan_list, name='loan_list'),
     path('repayloan/', views.repay_loan, name='repayloan'),
     path('penalty-form/', views.penalty_form, name='penalty_form'),
     path('create_group_announcement/', views.create_group_announcement, name='create_group_announcement'),
@@ -35,7 +36,7 @@ urlpatterns = [
     # path('password_change/done/', views.change_done, name='change_done'),
     
     path('management/trainings/', views.trainings_page, name='trainings_page'),
-    path('management/articles/', views.article_page, name='articles_page'),
+    path('management/upload_article/', views.upload_article, name='upload_article'),
     path('management/weather/', views.weather_page, name='weather_page'),
     
     path('management/counties/', views. county_list, name='county_list'),

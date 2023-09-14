@@ -335,3 +335,12 @@ def subcounty_list(request):
 def ward_list(request):
     wards = Ward.objects.all()
     return render(request, 'ward_list.html', {'wards': wards})
+
+def display_group_members(request):
+    group_id = request.GET.get('group_id')  # Get the selected group ID from the request
+    group_members = GroupMembers.objects.filter(group_id=group_id)
+
+    # Create a list of dictionaries to represent each member
+    members_list = [{'member_id': member.member_id.__str__()} for member in group_members]
+
+    return JsonResponse({'group_members': members_list})

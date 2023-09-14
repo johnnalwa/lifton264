@@ -42,6 +42,9 @@ urlpatterns = [
     path('management/counties/', views. county_list, name='county_list'),
     path('subcounties/', views.subcounty_list, name='subcounty_list'),
     path('wards/', views.ward_list, name='ward_list'),
+    
+    path('display_group_members/', views.display_group_members, name='display_group_members'),
+
 
     
 

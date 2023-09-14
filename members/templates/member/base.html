@@ -353,7 +353,7 @@
                     </div>
                     <small class="mb-0">Manage resources</small>
                   </div>
-                  <a href="{% url 'articles_page' %}" class="list-group-item"><i class="bi bi-bell"></i>Articles</a>
+                  <a href="{% url 'upload_article' %}" class="list-group-item"><i class="bi bi-bell"></i>Articles</a>
                   <a href="{% url 'trainings_page' %}" class="list-group-item"><i class="bi bi-bell"></i>Trainings</a>
                   <a href="{% url 'weather_page' %}" class="list-group-item"><i class="bi bi-bell"></i>Weather</a>
                 </div>
@@ -366,8 +366,8 @@
                     </div>
                     <small class="mb-0">Manage Sales</small>
                   </div>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>List Sales</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>List Loans</a>
+                  <a href="{% url 'list_sales' %}" class="list-group-item"><i class="bi bi-bell"></i>List Sales</a>
+                  <a href="{% url 'loans_list' %}" class="list-group-item"><i class="bi bi-bell"></i>List Loans</a>
                 </div>
               </div>
               <div class="tab-pane fade" id="pills-authentication">

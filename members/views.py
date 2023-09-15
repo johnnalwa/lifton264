@@ -12,6 +12,10 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.http import JsonResponse
+from django.db.models import Sum
+from django.db.models.functions import TruncMonth
+from django.shortcuts import render, get_object_or_404
+
 
 
 def login(request):
@@ -344,3 +348,21 @@ def display_group_members(request):
     members_list = [{'member_id': member.member_id.__str__()} for member in group_members]
 
     return JsonResponse({'group_members': members_list})
+
+def monthly_loan_data(request):
+    loan_data = (
+        Loan.objects.filter(status='ACTIVE')
+        .annotate(month=TruncMonth('approved_date'))
+        .values('month')
+        .annotate(total_loan_amount=Sum('amount'))
+        .order_by('month')
+    )
+    
+    return JsonResponse(list(loan_data), safe=False)
+
+
+def profile(request, username):
+    user = get_object_or_404(User, username=username)
+    member = get_object_or_404(Member, user=user)
+    context = {'member': member}
+    return render(request, 'member/profile.html', context)

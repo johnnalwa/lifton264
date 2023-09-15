@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     path('',views.login, name="login"),
     path('login/', views.LoginView.as_view(), name="user_login"),
@@ -44,6 +45,10 @@ urlpatterns = [
     path('wards/', views.ward_list, name='ward_list'),
     
     path('display_group_members/', views.display_group_members, name='display_group_members'),
+    path('monthly_loan_data/', views.monthly_loan_data, name='monthly_loan_data'),
+
+
+path('member/profile/<str:username>/', views.profile, name='profile')
 
 
     

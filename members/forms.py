@@ -243,3 +243,7 @@ class ArticleForm(forms.ModelForm):
         model = Article
         fields = '__all__'
         
+class MemberForm(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = '__all__'

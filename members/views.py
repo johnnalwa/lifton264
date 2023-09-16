@@ -170,8 +170,10 @@ def password_change_view(request):
         form = CustomPasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # Update the session with the new user object
-            return redirect('change_done')  # Redirect to a success page
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password has been successfully changed.')        
+        else:
+            messages.error(request, 'Password change failed. Please correct the errors below.')  # Add error message if form is not valid
     else:
         form = CustomPasswordChangeForm(request.user)
     

@@ -97,8 +97,8 @@ class RegisterVendorView(CreateView):
         return redirect('login')
 
 
-@login_required
-@member_required
+# @login_required
+# @member_required
 def MemberDashboard(request):
     #loans =  Loan.objects.filter(group_member_id=request.user.member)
     context = {
@@ -106,8 +106,8 @@ def MemberDashboard(request):
     }
     return render(request, 'member/dashboard.html', context)
 
-@login_required
-@management_required
+# @login_required
+# @management_required
 def ManagementDashboard(request):
    # message_count = models.Messages.objects.filter(username='username', status=0).count()
     totalgroups = Group.objects.all().count()
@@ -128,8 +128,8 @@ def ManagementDashboard(request):
     return render(request, 'management/dashboard.html', context)
 
 
-@login_required
-@vendor_required
+# @login_required
+# @vendor_required
 def VendorDashboard(request):
     #loans =  Loan.objects.filter(group_member_id=request.user.member)
     context = {
@@ -142,8 +142,8 @@ def list_vendors(request):
     vendors = Vendor.objects.all()
     return render(request, 'list_vendors.html', {'vendors': vendors})
 
-@login_required
-@management_required
+# @login_required
+# @management_required
 def CreateGroup(request):
     model = Group
     form_class = CreateGroupForm
@@ -154,8 +154,8 @@ def CreateGroup(request):
         login(self.request, user)
         return redirect('creategroup')
 
-@login_required
-@management_required
+# @login_required
+# @management_required
 def CreateGroup(request):
     model = Group
     form = CreateGroupForm
@@ -164,7 +164,7 @@ def CreateGroup(request):
     } 
     return render(request, "management/create_group.html", context)
 
-@login_required
+# @login_required
 def password_change_view(request):
     if request.method == 'POST':
         form = CustomPasswordChangeForm(request.user, request.POST)
@@ -179,7 +179,7 @@ def password_change_view(request):
     
     return render(request, 'password_update.html', {'form': form})
 
-@login_required
+# @login_required
 def apply_loan(request):
     if request.method == 'POST':
         form = LoanForm(request.POST)
@@ -192,7 +192,7 @@ def apply_loan(request):
     
     return render(request, 'loans.html', {'form': form})
 
-@login_required
+# @login_required
 def repay_loan(request):
     if request.method == 'POST':
         form = LoanRepaymentForm(request.POST)
@@ -211,7 +211,7 @@ def loan_list(request):
     loans = Loan.objects.all()
     return render(request, 'management/loan_list.html', {'loans': loans})
 
-@login_required
+# @login_required
 def penalty_form(request):
     if request.method == 'POST':
         form = PenaltyForm(request.POST)
@@ -224,7 +224,7 @@ def penalty_form(request):
 
     return render(request, 'penalty_form.html', {'form': form})
 
-@login_required
+# @login_required
 def create_group_announcement(request):
     if request.method == 'POST':
         form = GroupAnnouncementForm(request.POST)
@@ -238,7 +238,7 @@ def create_group_announcement(request):
 
     return render(request, 'group_announcement_form.html', {'form': form})
 
-@login_required
+# @login_required
 def create_loan_reminder(request):
     if request.method == 'POST':
         form = LoanReminderForm(request.POST)
@@ -252,7 +252,7 @@ def create_loan_reminder(request):
 
     return render(request, 'loan_reminder_form.html', {'form': form})
 
-@login_required
+# @login_required
 def vendor_form_view(request):
     if request.method == 'POST':
         form = VendorForm(request.POST)
@@ -265,7 +265,7 @@ def vendor_form_view(request):
 
     return render(request, 'vendor_form.html', {'form': form})
 
-@login_required
+# @login_required
 def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -277,12 +277,12 @@ def add_product(request):
 
     return render(request, 'management/add_product.html', {'form': form})
 
-@login_required
+# @login_required
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'product_list.html', {'products': products})
 
-@login_required
+# @login_required
 def trainings_page(request):
     if request.method == 'POST':
         form = TrainingForm(request.POST, request.FILES)
@@ -301,7 +301,7 @@ def trainings_page(request):
 
     return render(request, 'management/trainings_page.html', context)
 
-@login_required
+# @login_required
 def upload_article(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST, request.FILES)
@@ -315,29 +315,29 @@ def upload_article(request):
     return render(request, 'management/upload_article.html', {'form': form, 'articles': articles})
 
 
-@login_required
+# @login_required
 def article_page(request):
     return render(request, 'management/article_page.html')
     
-@login_required
+# @login_required
 def list_groups(request):
     groups = Group.objects.all()  # Fetch all groups from the database
     return render(request, 'management/list_groups.html', {'groups': groups})
 
-@login_required
+
 def weather_page(request):
     return render(request, 'management/weather_page.html')
-@login_required
+
 def county_list(request):
     counties = County.objects.all()
     return render(request, 'county_list.html', {'counties': counties})
 
-@login_required
+
 def subcounty_list(request):
     subcounties = SubCounty.objects.all()
     return render(request, 'subcounty_list.html', {'subcounties': subcounties})
 
-@login_required
+
 def ward_list(request):
     wards = Ward.objects.all()
     return render(request, 'ward_list.html', {'wards': wards})
@@ -368,3 +368,9 @@ def profile(request, username):
     member = get_object_or_404(Member, user=user)
     context = {'member': member}
     return render(request, 'member/profile.html', context)
+
+def category_list(request):
+    categories = Product.objects.values_list('category', flat=True).distinct()
+    
+    context = {'categories': categories}
+    return render(request, 'categories.html', context)

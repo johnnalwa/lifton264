@@ -108,7 +108,7 @@
                      </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="index2.html">
+                    <a class="dropdown-item" href="{% url 'management_dashboard' %}">
                        <div class="d-flex align-items-center">
                          <div class="setting-icon"><i class="bi bi-speedometer"></i></div>
                          <div class="setting-text ms-3"><span>Dashboard</span></div>
@@ -302,7 +302,7 @@
                   </div>
                   <a href="i.html" class="list-group-item"><i class="bi bi-envelope"></i>List Staff</a>
                   <a href="i.html" class="list-group-item"><i class="bi bi-chat-left-text"></i>List Group Members</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-archive"></i>List Vendors</a>
+                  <a href="{% url 'list_vendors' %}"class="list-group-item"><i class="bi bi-archive"></i>List Vendors</a>
                 </div>
               </div>
 
@@ -318,7 +318,8 @@
                   <a href="{% url 'vendor_form' %}" class="list-group-item"><i class="bi bi-bar-chart"></i>Add Vendor</a>
                   <a href="{% url 'product_list'%}" class="list-group-item"><i class="bi bi-bar-chart"></i>List Products</a>
                   <a href="{% url 'add_product' %}" class="list-group-item"><i class="bi bi-bar-chart"></i>Add Product</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bar-chart"></i>Categories</a>
+                  <a href="{% url 'category_list' %}" class="list-group-item"><i class="bi bi-bar-chart"></i>Categories</a>
+       
                 </div>
               </div>
               <div class="tab-pane fade" id="pills-ecommerce">

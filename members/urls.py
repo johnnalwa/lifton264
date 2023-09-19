@@ -48,8 +48,8 @@ urlpatterns = [
     path('monthly_loan_data/', views.monthly_loan_data, name='monthly_loan_data'),
 
 
-path('member/profile/<str:username>/', views.profile, name='profile')
-
+    path('member/profile/<str:username>/', views.profile, name='profile'),
+    path('categories/', views.category_list, name='category_list'),         
 
     
 

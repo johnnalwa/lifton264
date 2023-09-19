@@ -92,7 +92,7 @@
                  </li>
                  <li><hr class="dropdown-divider"></li>
                  <li>
-                    <a class="dropdown-item" href="{% url 'profile' %}">
+                    <a class="dropdown-item" href="#">
                        <div class="d-flex align-items-center">
                          <div class="setting-icon"><i class="fas fa-cat"></i></div>
                          <div class="setting-text ms-3"><span>My Profile</span></div>
@@ -300,8 +300,8 @@
                     </div>
                     <small class="mb-0">Manage users(Staff, group members and vendors)</small>
                   </div>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-envelope"></i>List Staff</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-chat-left-text"></i>List Group Members</a>
+                  <a href="#" class="list-group-item"><i class="bi bi-envelope"></i>List Staff</a>
+                  <a href="{% url 'groups' %}" class="list-group-item"><i class="bi bi-chat-left-text"></i>List Group Members</a>
                   <a href="{% url 'list_vendors' %}"class="list-group-item"><i class="bi bi-archive"></i>List Vendors</a>
                 </div>
               </div>
@@ -398,7 +398,7 @@
                     </div>
                     <small class="mb-0">Manage reports</small>
                   </div>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>List reports</a>
+                  <a href="{% url 'loan_line_chart' %}" class="list-group-item"><i class="bi bi-bell"></i>List reports</a>
                 </div>
               </div>
 

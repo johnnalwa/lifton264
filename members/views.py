@@ -334,20 +334,18 @@ def list_groups(request):
 
 
 
-def groups(request, group_id):
-    # Retrieve the group based on group_id
-    try:
-        group = Group.objects.get(id=group_id)
-    except Group.DoesNotExist:
-        group = None
+# def groups(request):
+    
+#     groups = Group.objects.all()
+    
+#     context = {'groups': groups}
+#     return render(request, 'group_members.html', context)
 
-    # Retrieve the members associated with the group
-    if group:
-        members = Member.objects.filter(group=group)
-    else:
-        members = []
-
-    context = {'group': group, 'members': members}
+def groups(request):
+    
+    groups = Group.objects.all()
+    
+    context = {'groups': groups}
     return render(request, 'group_members.html', context)
 
 
@@ -368,14 +366,7 @@ def ward_list(request):
     wards = Ward.objects.all()
     return render(request, 'ward_list.html', {'wards': wards})
 
-def display_group_members(request):
-    group_id = request.GET.get('group_id')  # Get the selected group ID from the request
-    group_members = GroupMembers.objects.filter(group_id=group_id)
 
-    # Create a list of dictionaries to represent each member
-    members_list = [{'member_id': member.member_id.__str__()} for member in group_members]
-
-    return JsonResponse({'group_members': members_list})
 
 def profile(request, username):
     user = get_object_or_404(User, username=username)
@@ -388,3 +379,18 @@ def category_list(request):
     
     context = {'categories': categories}
     return render(request, 'categories.html', context)
+
+
+def loan_line_chart(request):
+    # Retrieve data from the Loan model
+    loans = Loan.objects.all().order_by('create_at')
+    dates = [loan.create_at.strftime('%Y-%m-%d') for loan in loans]  # Format dates as needed
+    amounts = [loan.amount for loan in loans]
+
+    # Pass the data to the template
+    context = {
+        'dates': dates,
+        'amounts': amounts,
+    }
+
+    return render(request, 'loan_line_chart.html', context)

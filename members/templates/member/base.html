@@ -298,8 +298,8 @@
                     </div>
                     <small class="mb-0">Manage users(Staff, group members and vendors)</small>
                   </div>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-envelope"></i>List Staff</a>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-chat-left-text"></i>List Group Members</a>
+                  <a href="#" class="list-group-item"><i class="bi bi-envelope"></i>List Staff</a>
+                  <a href="{% url 'groups' %}" class="list-group-item"><i class="bi bi-chat-left-text"></i>List Group Members</a>
                   <a href=""{% url 'list_vendors' %}"" class="list-group-item"><i class="bi bi-archive"></i>List Vendors</a>
                 </div>
               </div>
@@ -393,7 +393,7 @@
                     </div>
                     <small class="mb-0">Manage reports</small>
                   </div>
-                  <a href="i.html" class="list-group-item"><i class="bi bi-bell"></i>List reports</a>
+                  <a href="{% url 'loan_line_chart' %}" class="list-group-item"><i class="bi bi-bell"></i>List reports</a>
                 </div>
               </div>
 

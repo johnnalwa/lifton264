@@ -48,13 +48,15 @@ urlpatterns = [
     path('subcounties/', views.subcounty_list, name='subcounty_list'),
     path('wards/', views.ward_list, name='ward_list'),
     
-    path('display_group_members/', views.display_group_members, name='display_group_members'),
+     path('groups/', views.groups, name='groups'),
     
 
 
     path('profile/<str:username>/', views.profile, name='profile'),
     path('categories/', views.category_list, name='category_list'),         
 
+
+    path('loan-line-chart/', views.loan_line_chart, name='loan_line_chart'),
     
 
 

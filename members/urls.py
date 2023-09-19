@@ -23,12 +23,16 @@ urlpatterns = [
     path('list_vendors/', views.list_vendors, name='list_vendors'),
     path('products/', views.product_list, name='product_list'),
 
-
+    path('loan-products/', views.display_loan_products, name='loan_products'),
+    path('loan-cards/', views.display_loans, name='loan_cards'),
     
     path('management/dashboard/',views.ManagementDashboard, name="management_dashboard"),
     path('management/register/',views.RegisterManagementView.as_view(), name="register_management"),
     path('management/creategroup/',views.CreateGroup, name="creategroup"),
     path('management/list-groups/', views.list_groups, name='list_groups'),
+    # path('groups/', views.groups, name='groups'),
+    path('groups/', views.groups, name='groups'),
+    
        
     path('vendor/dashboard/',views.VendorDashboard, name="vendor_dashboard"),
     path('vendor/register/',views.RegisterVendorView.as_view(), name="register_vendor"),
@@ -45,10 +49,10 @@ urlpatterns = [
     path('wards/', views.ward_list, name='ward_list'),
     
     path('display_group_members/', views.display_group_members, name='display_group_members'),
-    path('monthly_loan_data/', views.monthly_loan_data, name='monthly_loan_data'),
+    
 
 
-    path('member/profile/<str:username>/', views.profile, name='profile'),
+    path('profile/<str:username>/', views.profile, name='profile'),
     path('categories/', views.category_list, name='category_list'),         
 
     

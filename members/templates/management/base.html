@@ -92,7 +92,7 @@
                  </li>
                  <li><hr class="dropdown-divider"></li>
                  <li>
-                    <a class="dropdown-item" href="pages-user-profile.html">
+                    <a class="dropdown-item" href="{% url 'profile' %}">
                        <div class="d-flex align-items-center">
                          <div class="setting-icon"><i class="fas fa-cat"></i></div>
                          <div class="setting-text ms-3"><span>My Profile</span></div>
@@ -137,7 +137,7 @@
               <div class="dropdown-menu dropdown-menu-end">
                  <div class="row row-cols-3 gx-2">
                     <div class="col">
-                      <a href="ecommerce-orders.html">
+                      <a href="{% url 'loan_cards' %}">
                        <div class="apps p-2 radius-10 text-center">
                           <div class="apps-icon-box mb-1 text-white bg-primary bg-gradient">
                             <i class="fa fa-money" style="font-size:18px;color:white;"></i>
@@ -147,7 +147,7 @@
                       </a>
                     </div>
                     <div class="col">
-                      <a href="javascript:;">
+                      <a href="{% url 'loan_products' %}">
                       <div class="apps p-2 radius-10 text-center">
                          <div class="apps-icon-box mb-1 text-white bg-danger bg-gradient">
                           <i class="fa fa-industry" style="font-size:18px;color:white;"></i>
@@ -157,7 +157,7 @@
                     </a>
                    </div>
                    <div class="col">
-                    <a href="ecommerce-products-grid.html">
+                    <a href=""{% url 'list_vendors' %}"">
                     <div class="apps p-2 radius-10 text-center">
                        <div class="apps-icon-box mb-1 text-white bg-success bg-gradient">
                         <i class="fa fa-briefcase" style="font-size:18px;color:white;"></i>

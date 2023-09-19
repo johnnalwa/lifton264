@@ -277,6 +277,14 @@ def add_product(request):
 
     return render(request, 'management/add_product.html', {'form': form})
 
+def display_loan_products(request):
+    loan_products = LoanProduct.objects.all()
+    return render(request, 'loan_products.html', {'loan_products': loan_products})
+
+def display_loans(request):
+    loans = Loan.objects.all()
+    return render(request, 'loan_cards.html', {'loans': loans})
+
 # @login_required
 def product_list(request):
     products = Product.objects.all()
@@ -325,6 +333,24 @@ def list_groups(request):
     return render(request, 'management/list_groups.html', {'groups': groups})
 
 
+
+def groups(request, group_id):
+    # Retrieve the group based on group_id
+    try:
+        group = Group.objects.get(id=group_id)
+    except Group.DoesNotExist:
+        group = None
+
+    # Retrieve the members associated with the group
+    if group:
+        members = Member.objects.filter(group=group)
+    else:
+        members = []
+
+    context = {'group': group, 'members': members}
+    return render(request, 'group_members.html', context)
+
+
 def weather_page(request):
     return render(request, 'management/weather_page.html')
 
@@ -351,23 +377,11 @@ def display_group_members(request):
 
     return JsonResponse({'group_members': members_list})
 
-def monthly_loan_data(request):
-    loan_data = (
-        Loan.objects.filter(status='ACTIVE')
-        .annotate(month=TruncMonth('approved_date'))
-        .values('month')
-        .annotate(total_loan_amount=Sum('amount'))
-        .order_by('month')
-    )
-    
-    return JsonResponse(list(loan_data), safe=False)
-
-
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     member = get_object_or_404(Member, user=user)
     context = {'member': member}
-    return render(request, 'member/profile.html', context)
+    return render(request, 'profile.html', context)
 
 def category_list(request):
     categories = Product.objects.values_list('category', flat=True).distinct()

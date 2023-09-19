@@ -1,46 +1,16 @@
-<!-- group_members.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Group Members</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Group List</title>
 </head>
 <body>
-    <button id="show-members-btn">Show Group Members</button>
-    <table id="members-table">
-        <thead>
-            <tr>
-                <th>Member ID</th>
-                <th>Created At</th>
-                <th>Updated At</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-
-    <script>
-        $(document).ready(function() {
-            $('#show-members-btn').click(function() {
-                var group_id = '1';
-                $.ajax({
-                    url: '/group-members/',
-                    type: 'POST',
-                    data: { group_id: group_id },
-                    success: function(response) {
-                        var members = response.data;
-                        var tableBody = $('#members-table tbody');
-                        tableBody.empty();
-                        members.forEach(function(member) {
-                            var row = $('<tr>');
-                            row.append($('<td>').text(member.member_id));
-                            row.append($('<td>').text(member.created_at));
-                            row.append($('<td>').text(member.updated_at));
-                            tableBody.append(row);
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+    <h1>Groups:</h1>
+    <ul>
+        {% for group in groups %}
+            <li><a href="{% url 'group_members' group.id %}">{{ group.name }}</a></li>
+        {% empty %}
+            <li>No groups available.</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
